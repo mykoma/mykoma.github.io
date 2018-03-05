@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/03/05/NSString用copy还是strong/index.html">
 <meta property="og:site_name" content="成都老刘">
 <meta property="og:description" content="转载请注明出处: http://wwhy.tech/2018/03/05/NSString%E7%94%A8copy%E8%BF%98%E6%98%AFstrong/ clangclang 是一个支持C、C++、Objective-C、Objective-C++的轻量级编译器. 今天用到 clang 的一个指令 1clang -rewrite-objc 这个指令能够将 .m 文件转换成 cpp 文">
-<meta property="og:updated_time" content="2018-03-05T14:17:49.996Z">
+<meta property="og:updated_time" content="2018-03-05T14:26:55.029Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSString用copy还是strong的一点&quot;歪门邪道&quot;">
 <meta name="twitter:description" content="转载请注明出处: http://wwhy.tech/2018/03/05/NSString%E7%94%A8copy%E8%BF%98%E6%98%AFstrong/ clangclang 是一个支持C、C++、Objective-C、Objective-C++的轻量级编译器. 今天用到 clang 的一个指令 1clang -rewrite-objc 这个指令能够将 .m 文件转换成 cpp 文">
@@ -55,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -91,7 +91,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang -rewrite-objc</span><br></pre></td></tr></table></figure>
 <p>这个指令能够将 .m 文件转换成 cpp 文件, 有利于我们能够更好的理解 Objective-C 的一些底层特性.</p>
 <h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><p>大家在写代码的时候, 对于 NSString 的 property, 基本上都是使用 copy 来描述, 不过使用 strong 的时候, 其实也没有什么问题.</p>
-<p>这篇文章就是从底层实现来讨论, NSString 到底能不能使用 strong? strong 好还是 copy好?<br>(这里只讨论 NSString, 不讨论NSMutableString)</p>
+<p>这篇文章就是从底层实现来讨论, NSString 到底能不能使用 strong? strong 好还是 copy好?</p>
+<font color="red">(这里只讨论 NSString, 不讨论NSMutableString)</font>
+
+
 <p>我们添加一个 main.m 文件, 并且在代码中添加一个 User 类, 定义两个 NSString 属性 aStr 和 bStr,<br>其中 aStr 使用的copy, 而 bStr 使用的是 strong<br>代码如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@interface User : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy  ) NSString     * aStr;</span><br><span class="line">@property (nonatomic, strong) NSString     * bStr;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation User</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
 <p>并且在 main.m 的 main 函数中调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, const char * argv[]) &#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        User * user = [[User alloc] init];</span><br><span class="line">        user.aStr = @&quot;aaa&quot;;</span><br><span class="line">        user.bStr = @&quot;bbb&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -110,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/05/NSString用copy还是strong/" data-id="cjeeb8lst0004j8pwlvjvh8p2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/05/NSString用copy还是strong/" data-id="cjeebka2o0004mjpw9ucmwi7f" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li></ul>
@@ -123,7 +126,7 @@
   
   
     <a href="/2016/08/21/Swift中的闭包定义/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">Swift中的闭包定义</div>
     </a>
   
@@ -160,7 +163,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li></ul>
     </div>
@@ -170,7 +173,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
