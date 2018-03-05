@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -98,7 +98,8 @@
 <p>以及</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">static NSString * _I_User_aStr(User * self, SEL _cmd) &#123; return (*(NSString **)((char *)self + OBJC_IVAR_$_User$_aStr)); &#125;</span><br><span class="line">extern &quot;C&quot; __declspec(dllimport) void objc_setProperty (id, SEL, long, id, bool, bool);</span><br><span class="line"></span><br><span class="line">static void _I_User_setAStr_(User * self, SEL _cmd, NSString *aStr) &#123; objc_setProperty (self, _cmd, __OFFSETOFIVAR__(struct User, _aStr), (id)aStr, 0, 1); &#125;</span><br><span class="line"></span><br><span class="line">static NSString * _I_User_bStr(User * self, SEL _cmd) &#123; return (*(NSString **)((char *)self + OBJC_IVAR_$_User$_bStr)); &#125;</span><br><span class="line">static void _I_User_setBStr_(User * self, SEL _cmd, NSString *bStr) &#123; (*(NSString **)((char *)self + OBJC_IVAR_$_User$_bStr)) = bStr; &#125;</span><br><span class="line">// @end</span><br></pre></td></tr></table></figure>
 <p>从上面的代码可以看出, Objective-C 的对象, 实际上对应的就是 C 里面的 struct 结构体.</p>
-<p>而 User 类里面的 aStr 和 bStr 的属性, 也对应了 C 里面的 static 函数, 其中<br>这里比较重要的是 set 函数<code>_I_User_setAStr_</code>和<code>_I_User_setBStr_</code></p>
+<p>而 User 类里面的 aStr 和 bStr 的属性, 也对应了 C 里面的 static 函数, 其中<br>这里比较重要的是 set 函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>static void _I_User_setAStr_(User <em> self, SEL _cmd, NSString </em>aStr) { objc_setProperty (self, _cmd, <strong>OFFSETOFIVAR</strong>(struct User, _aStr), (id)aStr, 0, 1); }<br>static void _I_User_setBStr_(User <em> self, SEL _cmd, NSString </em>bStr) { (<em>(NSString **)((char </em>)self + OBJC_IVAR_$_User$_bStr)) = bStr; }<br><code>`</code></p>
 <p>注意这里的<code>_I_User_setAStr_</code>里面调用了<code>objc_setProperty</code>去设置值,<br>而<code>_I_User_setBStr_</code>是直接计算偏移量去设置.</p>
 <p>所以从效率上来说,<code>_I_User_setBStr_</code>的效率比<code>_I_User_setAStr_</code>更高,<br>毕竟直接使用偏移量去设置内存速度更快, 多调用一层函数, 就会多消耗一点资源, 毕竟积少成多.</p>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>综上所述, 对于 NSString 的 property 来说, 使用 strong 其实会更好的一些, 底层的调用效率会更高; 不过对于现在的 cpu 来说, 两者差别不大, 如果你是一个追求极致的人, 使用 strong 或者更适合你.</p>
@@ -106,10 +107,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/05/NSString用copy还是strong/" data-id="cjeeaq01r0004vzpwm5sxbjo9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/05/NSString用copy还是strong/" data-id="cjeeasj3o0004yxpweamqxmd0" class="article-share-link">Teilen</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li></ul>
 
     </footer>
   </div>
@@ -156,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/21/Swift中的闭包定义/" data-id="cjeeaq01v0008vzpw5olchgby" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/21/Swift中的闭包定义/" data-id="cjeeasj3s0008yxpwh1u5rq22" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
@@ -214,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/07/Swift中的init/" data-id="cjeeaq01s0005vzpw4fmb28me" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/07/Swift中的init/" data-id="cjeeasj3p0005yxpwpbwbezvz" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
@@ -283,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/08/也来写一写我理解中的代码布局、xib布局以及storyboard布局/" data-id="cjeeaq01x0009vzpw1pbtp9n1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/08/也来写一写我理解中的代码布局、xib布局以及storyboard布局/" data-id="cjeeasj3u0009yxpw2qm3fowo" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI布局/">UI布局</a></li></ul>
@@ -323,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2011/01/15/C-字符串比较-汇编代码实现/" data-id="cjeeaq01q0003vzpwsz2be65x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2011/01/15/C-字符串比较-汇编代码实现/" data-id="cjeeasj3n0003yxpw7eptbl27" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
@@ -363,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2011/01/15/C-字符串拷贝-汇编代码实现/" data-id="cjeeaq01m0001vzpw6dgwww1a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2011/01/15/C-字符串拷贝-汇编代码实现/" data-id="cjeeasj3j0001yxpwc48j62oc" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
@@ -413,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/09/29/C-前向声明隐含的问题/" data-id="cjeeaq01i0000vzpwcgwzse9o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2010/09/29/C-前向声明隐含的问题/" data-id="cjeeasj3f0000yxpwlga0eu29" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
@@ -438,7 +439,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI布局/">UI布局</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI布局/">UI布局</a></li></ul>
     </div>
   </div>
 
@@ -448,14 +449,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C-和汇编/" style="font-size: 20px;">C++和汇编</a> <a href="/tags/Swift/" style="font-size: 20px;">Swift</a> <a href="/tags/UI布局/" style="font-size: 10px;">UI布局</a>
+      <a href="/tags/C-和汇编/" style="font-size: 20px;">C++和汇编</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/UI布局/" style="font-size: 10px;">UI布局</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li></ul>
     </div>
@@ -465,7 +466,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
