@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>NSString的copy和strong的另外视角 | 成都老刘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载请注明出处: http://wwhy.tech/2018/03/05/NSString%E7%94%A8copy%E8%BF%98%E6%98%AFstrong/ clangclang 是一个支持C、C++、Objective-C、Objective-C++的轻量级编译器. 今天用到 clang 的一个指令 1clang -rewrite-objc 这个指令能够将 .m 文件转换成 cpp 文">
+<meta name="keywords" content="Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSString的copy和strong的另外视角">
+<meta property="og:url" content="http://yoursite.com/2018/03/05/2018_03_05/index.html">
+<meta property="og:site_name" content="成都老刘">
+<meta property="og:description" content="转载请注明出处: http://wwhy.tech/2018/03/05/NSString%E7%94%A8copy%E8%BF%98%E6%98%AFstrong/ clangclang 是一个支持C、C++、Objective-C、Objective-C++的轻量级编译器. 今天用到 clang 的一个指令 1clang -rewrite-objc 这个指令能够将 .m 文件转换成 cpp 文">
+<meta property="og:updated_time" content="2018-03-07T14:22:06.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSString的copy和strong的另外视角">
+<meta name="twitter:description" content="转载请注明出处: http://wwhy.tech/2018/03/05/NSString%E7%94%A8copy%E8%BF%98%E6%98%AFstrong/ clangclang 是一个支持C、C++、Objective-C、Objective-C++的轻量级编译器. 今天用到 clang 的一个指令 1clang -rewrite-objc 这个指令能够将 .m 文件转换成 cpp 文">
+  
+    <link rel="alternate" href="/atom.xml" title="成都老刘" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">成都老刘</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2018_03_05" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/05/2018_03_05/" class="article-date">
+  <time datetime="2018-03-05T12:43:00.000Z" itemprop="datePublished">2018-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NSString的copy和strong的另外视角
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转载请注明出处: <a href="http://wwhy.tech/2018/03/05/NSString%E7%94%A8copy%E8%BF%98%E6%98%AFstrong/" target="_blank" rel="noopener">http://wwhy.tech/2018/03/05/NSString%E7%94%A8copy%E8%BF%98%E6%98%AFstrong/</a></p>
+<h3 id="clang"><a href="#clang" class="headerlink" title="clang"></a>clang</h3><p>clang 是一个支持C、C++、Objective-C、Objective-C++的轻量级编译器. 今天用到 clang 的一个指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang -rewrite-objc</span><br></pre></td></tr></table></figure>
+<p>这个指令能够将 .m 文件转换成 cpp 文件, 有利于我们能够更好的理解 Objective-C 的一些底层特性.</p>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><p>大家在写代码的时候, 对于 NSString 的 property, 基本上都是使用 copy 来描述, 不过使用 strong 的时候, 其实也没有什么问题.</p>
+<p>这篇文章就是从底层实现来讨论, NSString 到底能不能使用 strong? strong 好还是 copy好?</p>
+<font color="red">(这里只讨论 NSString, 不讨论NSMutableString)</font>
+
+
+<p>我们添加一个 main.m 文件, 并且在代码中添加一个 User 类, 定义两个 NSString 属性 aStr 和 bStr,<br>其中 aStr 使用的copy, 而 bStr 使用的是 strong<br>代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@interface User : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy  ) NSString     * aStr;</span><br><span class="line">@property (nonatomic, strong) NSString     * bStr;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation User</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p>并且在 main.m 的 main 函数中调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, const char * argv[]) &#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        User * user = [[User alloc] init];</span><br><span class="line">        user.aStr = @&quot;aaa&quot;;</span><br><span class="line">        user.bStr = @&quot;bbb&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="转换代码"><a href="#转换代码" class="headerlink" title="转换代码"></a>转换代码</h3><p>使用 clang 转换代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang -rewrite-objc main.m</span><br></pre></td></tr></table></figure></p>
+<p>转换 main.m 文件, 得到 main.cpp 文件, 找到文件的最后几行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#ifndef _REWRITER_typedef_User</span><br><span class="line">#define _REWRITER_typedef_User</span><br><span class="line">typedef struct objc_object User;</span><br><span class="line">typedef struct &#123;&#125; _objc_exc_User;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot; unsigned long OBJC_IVAR_$_User$_aStr;</span><br><span class="line">extern &quot;C&quot; unsigned long OBJC_IVAR_$_User$_bStr;</span><br><span class="line">struct User_IMPL &#123;</span><br><span class="line">	struct NSObject_IMPL NSObject_IVARS;</span><br><span class="line">	NSString *_aStr;</span><br><span class="line">	NSString *_bStr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>以及</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">static NSString * _I_User_aStr(User * self, SEL _cmd) &#123; return (*(NSString **)((char *)self + OBJC_IVAR_$_User$_aStr)); &#125;</span><br><span class="line">extern &quot;C&quot; __declspec(dllimport) void objc_setProperty (id, SEL, long, id, bool, bool);</span><br><span class="line"></span><br><span class="line">static void _I_User_setAStr_(User * self, SEL _cmd, NSString *aStr) &#123; objc_setProperty (self, _cmd, __OFFSETOFIVAR__(struct User, _aStr), (id)aStr, 0, 1); &#125;</span><br><span class="line"></span><br><span class="line">static NSString * _I_User_bStr(User * self, SEL _cmd) &#123; return (*(NSString **)((char *)self + OBJC_IVAR_$_User$_bStr)); &#125;</span><br><span class="line">static void _I_User_setBStr_(User * self, SEL _cmd, NSString *bStr) &#123; (*(NSString **)((char *)self + OBJC_IVAR_$_User$_bStr)) = bStr; &#125;</span><br><span class="line">// @end</span><br></pre></td></tr></table></figure>
+<p>从上面的代码可以看出, Objective-C 的对象, 实际上对应的就是 C 里面的 struct 结构体.</p>
+<p>而 User 类里面的 aStr 和 bStr 的属性, 也对应了 C 里面的 static 函数, 其中<br>这里比较重要的是 set 函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">static void _I_User_setAStr_(User * self, SEL _cmd, NSString *aStr) &#123; objc_setProperty (self, _cmd, __OFFSETOFIVAR__(struct User, _aStr), (id)aStr, 0, 1); &#125;</span><br><span class="line">static void _I_User_setBStr_(User * self, SEL _cmd, NSString *bStr) &#123; (*(NSString **)((char *)self + OBJC_IVAR_$_User$_bStr)) = bStr; &#125;</span><br></pre></td></tr></table></figure>
+<p>注意这里的<code>_I_User_setAStr_</code>里面调用了<font color="blue">objc_setProperty</font>去设置值,<br>而<code>_I_User_setBStr_</code>是直接计算偏移量去设置.</p>
+<p>所以从效率上来说,<code>_I_User_setBStr_</code>的效率比<code>_I_User_setAStr_</code>更高,<br>毕竟直接使用偏移量去设置内存速度更快, 多调用一层函数, 就会多消耗一点资源, 毕竟积少成多.</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>综上所述, 对于 NSString 的 property 来说, <font color="red">使用 strong, 底层的调用效率会更高</font>; 不过用 copy, 更符合现在的用法, 毕竟一旦出了问题, 花的代价可不只是这点省出来的效率能够承受的.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/05/2018_03_05/" data-id="cjeh6abvp0000trpwf1atgvb1" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/21/Swift中的闭包定义/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Swift中的闭包定义</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI布局/">UI布局</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-和汇编/" style="font-size: 20px;">C++和汇编</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/UI布局/" style="font-size: 10px;">UI布局</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/05/2018_03_05/">NSString的copy和strong的另外视角</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/21/Swift中的闭包定义/">Swift中的闭包定义</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/07/Swift中的init/">Swift中的init</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/08/也来写一写我理解中的代码布局、xib布局以及storyboard布局/">也来写一写我理解中的代码布局、xib布局以及storyboard布局</a>
+          </li>
+        
+          <li>
+            <a href="/2011/01/15/C-字符串比较-汇编代码实现/">C++ 字符串比较 汇编代码实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Gang Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
