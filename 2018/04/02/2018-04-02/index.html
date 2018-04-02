@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>再总结一下NSString 与 NSMutableString 的 property 约束 | 成都老刘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前在网上看了很多关于 NSString 的 property 约束，不过总感觉总结得没那么直接。 对于 NSString 来说，到底用 copy 还是 strong?看看下面的代码： 123456789@interface Test: NSObject@property (nonatomic, strong) NSString * string;@end  NSMutableString * a">
+<meta name="keywords" content="Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再总结一下NSString 与 NSMutableString 的 property 约束">
+<meta property="og:url" content="http://yoursite.com/2018/04/02/2018-04-02/index.html">
+<meta property="og:site_name" content="成都老刘">
+<meta property="og:description" content="之前在网上看了很多关于 NSString 的 property 约束，不过总感觉总结得没那么直接。 对于 NSString 来说，到底用 copy 还是 strong?看看下面的代码： 123456789@interface Test: NSObject@property (nonatomic, strong) NSString * string;@end  NSMutableString * a">
+<meta property="og:updated_time" content="2018-04-02T10:48:06.427Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="再总结一下NSString 与 NSMutableString 的 property 约束">
+<meta name="twitter:description" content="之前在网上看了很多关于 NSString 的 property 约束，不过总感觉总结得没那么直接。 对于 NSString 来说，到底用 copy 还是 strong?看看下面的代码： 123456789@interface Test: NSObject@property (nonatomic, strong) NSString * string;@end  NSMutableString * a">
+  
+    <link rel="alternate" href="/atom.xml" title="成都老刘" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">成都老刘</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2018-04-02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/02/2018-04-02/" class="article-date">
+  <time datetime="2018-04-02T09:43:00.000Z" itemprop="datePublished">2018-04-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      再总结一下NSString 与 NSMutableString 的 property 约束
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前在网上看了很多关于 NSString 的 property 约束，不过总感觉总结得没那么直接。</p>
+<h4 id="对于-NSString-来说，到底用-copy-还是-strong"><a href="#对于-NSString-来说，到底用-copy-还是-strong" class="headerlink" title="对于 NSString 来说，到底用 copy 还是 strong?"></a>对于 NSString 来说，到底用 copy 还是 strong?</h4><p>看看下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@interface Test: NSObject</span><br><span class="line">@property (nonatomic, strong) NSString * string;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">  NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];</span><br><span class="line">  Test * test = [Test new];</span><br><span class="line">  test.string = aStr;</span><br><span class="line">  [aStr appendString:@&quot; world&quot;];</span><br><span class="line">  NSLog(@&quot;%@&quot;, test.string);</span><br></pre></td></tr></table></figure>
+<p>以上代码，原本打算 test 对象的 string 对象赋值之后就不会改变，即一直都是 hello，然而上面的代码输出是 hello world，违背了代码设计的初衷。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSString 如果使用 strong 的话， 从外部给这个属性赋值，可能是一个 NSMutableString，如果外部把这个 NSMutableString 的值给改变了， 那么这个属性的值也会被改变。</span><br></pre></td></tr></table></figure>
+<h4 id="对于NSMutableString来说，用-copy-还是-strong"><a href="#对于NSMutableString来说，用-copy-还是-strong" class="headerlink" title="对于NSMutableString来说，用 copy 还是 strong?"></a>对于NSMutableString来说，用 copy 还是 strong?</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@interface Test: NSObject</span><br><span class="line">@property (nonatomic, copy) NSMutableString * mString;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">  NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];</span><br><span class="line">  Test * test = [Test new];</span><br><span class="line">  test.mString = aStr;</span><br><span class="line">  [test.mString appendString:@&quot;world&quot;];</span><br></pre></td></tr></table></figure>
+<p>以上代码中，test 对象的 mString 属性，由于定义的 copy，然而 copy 会拷贝一个不可变的值，我们对它进行一些可变协议的操作，即执行：[NSString appendString:]，程序崩溃。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSMutableString 如果使用 copy 的话，将一个外部对象赋值给这个属性的时候， 会进行一次 copy 操作， 然而 copy 是拷贝出一个不可变的对象给属性（实际上应该调用 mutableCopy，但是@property 并没有 mutableCopy），如果之后对这个属性（实际上是一个不可变的对象）进行可变协议的调用， 那么程序就会崩溃。</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>和 NSString 与 NSMutableString 类似，NSArray 与 NSMutableArray， NSDictionary 与 NSMutableDictiontary也与以上运行效果一致。</p>
+<font color="red"><br>NSString, NSArray 与 NSDictionary 使用 copy；<br>NSMutableString, NSMutableArray 与 NSMutableDictionary使用 strong。<br></font>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/02/2018-04-02/" data-id="cjfi48rfp0005pcpwx602uc9w" class="article-share-link">Teilen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/21/2016-08-21/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Swift中的闭包定义</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI布局/">UI布局</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-和汇编/" style="font-size: 20px;">C++和汇编</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/UI布局/" style="font-size: 10px;">UI布局</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/02/2018-04-02/">再总结一下NSString 与 NSMutableString 的 property 约束</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/21/2016-08-21/">Swift中的闭包定义</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/07/2016-07-07/">Swift中的init</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/08/2016-06-08/">也来写一写我理解中的代码布局、xib布局以及storyboard布局</a>
+          </li>
+        
+          <li>
+            <a href="/2011/01/15/2011-01-15/">C++ 字符串比较 汇编代码实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Gang Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
