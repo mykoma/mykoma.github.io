@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -89,7 +89,7 @@
 <p>以上代码，原本打算 test 对象的 string 对象赋值之后就不会改变，即一直都是 hello，然而上面的代码输出是 hello world，违背了代码设计的初衷。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSString 如果使用 strong 的话， 从外部给这个属性赋值，可能是一个 NSMutableString，如果外部把这个 NSMutableString 的值给改变了， 那么这个属性的值也会被改变。</span><br></pre></td></tr></table></figure>
 <h3 id="对于NSMutableString来说，用-copy-还是-strong"><a href="#对于NSMutableString来说，用-copy-还是-strong" class="headerlink" title="对于NSMutableString来说，用 copy 还是 strong?"></a>对于NSMutableString来说，用 copy 还是 strong?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@interface Test: NSObject</span><br><span class="line">@property (nonatomic, copy) NSMutableString * mString;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">  NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];</span><br><span class="line">  Test * test = [Test new];</span><br><span class="line">  test.mString = aStr;</span><br><span class="line">  [test.mString appendString:@&quot;world&quot;];</span><br></pre></td></tr></table></figure>
-<p>以上代码中，test 对象的 mString 属性，由于定义的 copy，然而 <font color="red">copy属性会拷贝一个不可变的值</font>，我们对它进行一些可变协议的操作，即执行：[NSString appendString:]，程序崩溃。</p>
+<p>以上代码中，test 对象的 mString 属性，由于定义的 copy，然而 <font color="red">copy属性会拷贝一个不可变的值</font>，然而我们对它进行一些可变协议的操作，即执行：[NSString appendString:]，程序崩溃。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSMutableString 如果使用 copy 的话，将一个外部对象赋值给这个属性的时候， 会进行一次 copy 操作， 然而 copy 是拷贝出一个不可变的对象给属性（实际上应该调用 mutableCopy，但是@property 并没有 mutableCopy），如果之后对这个属性（实际上是一个不可变的对象）进行可变协议的调用， 那么程序就会崩溃。</span><br></pre></td></tr></table></figure>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>和 NSString 与 NSMutableString 类似，NSArray 与 NSMutableArray， NSDictionary 与 NSMutableDictiontary也与以上运行效果一致。</p>
 <font color="red"><br>NSString, NSArray 与 NSDictionary 使用 copy；<br>NSMutableString, NSMutableArray 与 NSMutableDictionary使用 strong。<br></font>
@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/2018-04-02/" data-id="cjfi4duve0009rdpwju6a4kht" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/02/2018-04-02/" data-id="cjfi4ezhd0009sgpwv9x00v29" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li></ul>
@@ -147,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/21/2016-08-21/" data-id="cjfi4duvc0008rdpwp1xctduk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/21/2016-08-21/" data-id="cjfi4ezhb0008sgpwwdvjaiit" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
@@ -205,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/07/2016-07-07/" data-id="cjfi4duva0005rdpw4sibul4t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/07/2016-07-07/" data-id="cjfi4ezh90005sgpwc2r06myj" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
@@ -274,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/08/2016-06-08/" data-id="cjfi4duv80004rdpw89ola3es" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/06/08/2016-06-08/" data-id="cjfi4ezh80004sgpwdx7948hk" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI布局/">UI布局</a></li></ul>
@@ -314,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2011/01/15/2011-01-15/" data-id="cjfi4duv30001rdpw9pnnl3p7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2011/01/15/2011-01-15/" data-id="cjfi4ezh20001sgpwp6260n4w" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
@@ -354,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2011/01/15/2011-01-16/" data-id="cjfi4duv70003rdpwiu2g6zet" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2011/01/15/2011-01-16/" data-id="cjfi4ezh60003sgpw3b33jqx4" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
@@ -404,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/09/29/2010-09-29/" data-id="cjfi4duuz0000rdpwma95ic17" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2010/09/29/2010-09-29/" data-id="cjfi4ezgy0000sgpwe8rtzoe5" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
@@ -446,7 +446,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li></ul>
     </div>
@@ -456,7 +456,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
