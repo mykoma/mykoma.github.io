@@ -1,596 +1,971 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  
+    <!-- title -->
 
-  
-  <title>成都老刘</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="成都老刘">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="成都老刘">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="成都老刘">
-  
-    <link rel="alternate" href="/atom.xml" title="成都老刘" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>fi3ework&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.7);
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+        
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">成都老刘</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
+    
+        <body class="home-body">
+    
+    
+<header class="header index-header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <a class="home-link" href=/>成都老刘</a>
 </header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-2018-04-02" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/02/2018-04-02/" class="article-date">
-  <time datetime="2018-04-02T09:43:00.000Z" itemprop="datePublished">2018-04-02</time>
-</a>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
     
-  </div>
-  <div class="article-inner">
+    <!-- 主页  -->
     
     
-      <header class="article-header">
+    <!-- 文章页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            成都老刘
+            <!-- 文章页  -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+                it's better to burn out than to fade away
+            
+            <!-- 文章页  -->
+            
+        </p>
+        <!-- 文章页meta -->
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/02/2018-04-02/">再总结一下NSString 与 NSMutableString 的 property 约束</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前在网上看了很多关于 NSString 的 property 约束，不过总感觉总结得没那么直接。这里我再重复的总结一下。</p>
-<h3 id="对于-NSString-来说，到底用-copy-还是-strong"><a href="#对于-NSString-来说，到底用-copy-还是-strong" class="headerlink" title="对于 NSString 来说，到底用 copy 还是 strong?"></a>对于 NSString 来说，到底用 copy 还是 strong?</h3><p>看看下面的代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@interface Test: NSObject</span><br><span class="line">@property (nonatomic, strong) NSString * string;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">  NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];</span><br><span class="line">  Test * test = [Test new];</span><br><span class="line">  test.string = aStr;</span><br><span class="line">  [aStr appendString:@&quot; world&quot;];</span><br><span class="line">  NSLog(@&quot;%@&quot;, test.string);</span><br></pre></td></tr></table></figure>
-<p>以上代码，原本打算 test 对象的 string 对象赋值之后就不会改变，即一直都是 hello，然而上面的代码输出是 hello world，违背了代码设计的初衷。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSString 如果使用 strong 的话， 从外部给这个属性赋值，可能是一个 NSMutableString，如果外部把这个 NSMutableString 的值给改变了， 那么这个属性的值也会被改变。</span><br></pre></td></tr></table></figure>
-<h3 id="对于NSMutableString来说，用-copy-还是-strong"><a href="#对于NSMutableString来说，用-copy-还是-strong" class="headerlink" title="对于NSMutableString来说，用 copy 还是 strong?"></a>对于NSMutableString来说，用 copy 还是 strong?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@interface Test: NSObject</span><br><span class="line">@property (nonatomic, copy) NSMutableString * mString;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">  NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];</span><br><span class="line">  Test * test = [Test new];</span><br><span class="line">  test.mString = aStr;</span><br><span class="line">  [test.mString appendString:@&quot;world&quot;];</span><br></pre></td></tr></table></figure>
-<p>以上代码中，test 对象的 mString 属性，由于定义的 copy，然而 <font color="red">copy属性会拷贝一个不可变的值</font>，然而我们对它进行一些可变协议的操作，即执行：[NSString appendString:]，程序崩溃。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSMutableString 如果使用 copy 的话，将一个外部对象赋值给这个属性的时候， 会进行一次 copy 操作， 然而 copy 是拷贝出一个不可变的对象给属性（实际上应该调用 mutableCopy，但是@property 并没有 mutableCopy），如果之后对这个属性（实际上是一个不可变的对象）进行可变协议的调用， 那么程序就会崩溃。</span><br></pre></td></tr></table></figure>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>和 NSString 与 NSMutableString 类似，NSArray 与 NSMutableArray， NSDictionary 与 NSMutableDictiontary也与以上运行效果一致。</p>
-<font color="red"><br>NSString, NSArray 与 NSDictionary 使用 copy；<br>NSMutableString, NSMutableArray 与 NSMutableDictionary使用 strong。<br></font>
-
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/2018-04-02/" data-id="cjfm06em6000crypwdbyeyslv" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Objective-C/">Objective-C</a></li></ul>
-
-    </footer>
-  </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
   
-</article>
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
 
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
 
-  
-    <article id="post-2018-03-20" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/20/2018-03-20/" class="article-date">
-  <time datetime="2018-03-20T15:59:12.000Z" itemprop="datePublished">2018-03-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/20/2018-03-20/">优化之离屏渲染</a>
-    </h1>
-  
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
 
-      </header>
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main index-page">
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这篇文章主要是总结一下我对离屏渲染的理解，之前一直不太理解离屏渲染到底是个什么，也不太理解为什么他会引起滚动界面卡顿，一直也没有去深入了解，自己也深感惭愧。以前看到了<a href="https://blog.ibireme.com" target="_blank" rel="noopener">@ibireme</a>写的<a href="https://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/" target="_blank" rel="noopener">iOS 保持界面流畅的技巧</a>这篇文章，里面也描述了下离屏渲染。现在再次深入阅读，才比较理解离屏渲染到底是怎么回事。</p>
-<h4 id="屏幕显示原理"><a href="#屏幕显示原理" class="headerlink" title="屏幕显示原理"></a>屏幕显示原理</h4><p>引用一下<a href="https://blog.ibireme.com" target="_blank" rel="noopener">@ibireme</a>的原文</p>
-<blockquote>
-<p>首先从过去的 CRT 显示器原理说起。CRT 的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或者其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称 HSync；而当一帧画面绘制完成后，电子枪回复到原位，准备画下一帧前，显示器会发出一个垂直同步信号（vertical synchronization），简称 VSync。显示器通常以固定频率进行刷新，这个刷新率就是 VSync 信号产生的频率。尽管现在的设备大都是液晶显示屏了，但原理仍然没有变。</p>
-</blockquote>
-<blockquote>
-<p>CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。</p>
-</blockquote>
-<p><img src="./pics/2018-03-20/ios_screen_scan.png" alt=""></p>
-<blockquote>
-<p>在最简单的情况下，帧缓冲区只有一个，这时帧缓冲区的读取和刷新都都会有比较大的效率问题。为了解决效率问题，显示系统通常会引入两个缓冲区，即双缓冲机制。在这种情况下，GPU 会预先渲染好一帧放入一个缓冲区内，让视频控制器读取，当下一帧渲染好后，GPU 会直接把视频控制器的指针指向第二个缓冲器。如此一来效率会有很大的提升。</p>
-</blockquote>
-<p>这里介绍了 GPU 为了效率问题，使用了两个帧缓冲区。对于帧缓冲区的个数，iOS 系统中使用的是双缓冲机制，而 Android 使用的三缓冲机制。题外话，不得不佩服 iOS 系统的设计，在硬件不如 Android 的提前下，界面的流畅度却超过 Android 机器。</p>
-<h4 id="离屏渲染"><a href="#离屏渲染" class="headerlink" title="离屏渲染"></a>离屏渲染</h4><p>直接引用网络上的一段文字：</p>
-<blockquote>
-<p>OpenGL中，GPU屏幕渲染有以下两种方式：</p>
-</blockquote>
-<blockquote>
-<p>1.<strong>On-Screen Rendering</strong><br><br>意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。<br><br>2.<strong>Off-Screen Rendering</strong><br><br>意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。</p>
-</blockquote>
-<p>对于一个 UIView 的渲染过程：</p>
-<blockquote>
-<ol>
-<li>UIView的layer层有一个content，指向一块缓存，即backing store</li>
-<li>UIView绘制时，会调用drawRect方法，通过context将数据写入backing store</li>
-<li>在backing store写完后，通过render server交给GPU去渲染，将backing store中的bitmap数据显示在屏幕上</li>
-</ol>
-</blockquote>
-<p><img src="./pics/2018-03-20/uiview_render.png" alt=""></p>
-<p>当我们在使用<strong>透明度（alapha）</strong>、<strong>corner（圆角）</strong>、<strong>shadow（阴影）</strong>、<strong>edge antialiasing（抗锯齿）</strong>和<strong>mask</strong>等视图功能的时候，由于图层不是那种简单的覆盖，而是需要额外计算图层的显示关系，由于当前已经是 GPU 渲染了，所以在 GPU 的当前屏幕缓冲区外，新建了一个缓冲区，在这个缓冲区中，去进行这些额外的渲染，这就是离屏渲染。</p>
-<ol>
-<li>创建离屏缓冲区是一个代价是很大的。</li>
-<li>（假设我们的在界面中画了圆角），如果我们创建的圆角 N 个，那么在这个离屏缓冲区中，去处理这 N 个圆角的时候，会大量的切换上下文，然而，切换上下文也是一个代价非常大的操作。</li>
-</ol>
-<p>所以，当在开发过程中，<strong>如果离屏渲染没有处理好，对 App 的性能影响是非常大的</strong>， 后文会有相关的实例对比。</p>
-<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><h6 id="圆角"><a href="#圆角" class="headerlink" title="圆角"></a>圆角</h6><h6 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h6><h6 id="Mask"><a href="#Mask" class="headerlink" title="Mask"></a>Mask</h6>
-      
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2018/04/02/2018-04-02/" >
+                
+                    <span>再总结一下NSString 与 NSMutableString 的 property 约束</span>
+            </a>
+            <div class="abstract-content">
+                之前在网上看了很多关于 NSString 的 property 约束，不过总感觉总结得没那么直接。这里我再重复的总结一下。
+对于 NSString 来说，到底用 copy 还是 strong?
+看看下面的代码：
+123456789@interface Test: NSObject@property (nonatomic, strong) NSString * string;@end  NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];  Test * test = [Test new];  test.string = aS...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/02</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2018/03/20/2018-03-20/" >
+                
+                    <span>优化之离屏渲染</span>
+            </a>
+            <div class="abstract-content">
+                这篇文章主要是总结一下我对离屏渲染的理解，之前一直不太理解离屏渲染到底是个什么，也不太理解为什么他会引起滚动界面卡顿，一直也没有去深入了解，自己也深感惭愧。以前看到了@ibireme写的iOS 保持界面流畅的技巧这篇文章，里面也描述了下离屏渲染。现在再次深入阅读，才比较理解离屏渲染到底是怎么回事。
+屏幕显示原理
+引用一下@ibireme的原文
+
+首先从过去的 CRT 显示器原理说起。CRT 的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或者其他硬件）会用硬件时钟产生...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/20</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS 优化">iOS 优化</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2016/08/21/2016-08-21/" >
+                
+                    <span>Swift中的闭包定义</span>
+            </a>
+            <div class="abstract-content">
+                定义闭包变量
+1var closureName: (ParameterTypes) -&gt; (ReturnType)
+定义可选闭包变量
+1var closureName: ((ParameterTypes) -&gt; (ReturnType))?
+定义闭包别名
+1typealias ClosureType = (ParameterTypes) -&gt; (ReturnType)
+定义闭包常量
+1let closureName: ClosureType = &#123; ... &#125;
+在函数内部
+1funcName(&#123;(ParameterTypes) -&gt; ...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/08/21</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Swift">Swift</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2016/07/07/2016-07-07/" >
+                
+                    <span>Swift中的init</span>
+            </a>
+            <div class="abstract-content">
+                前言
+最近总算开始做新项目， 语言肯定的选Swift了。问题一个接一个，不过还好，来一个解决一个。
+今天遇到了Swift中的init的问题， 用Xcode也没有自动补全，也没有看到相关init的东西，所以对init构造过程进行一个分析。
+两个类
+有一个Parent的Class
+12345class Parent: NSObject &#123;	override init() &#123;		NSLog(&quot;Parent Init&quot;)	&#125;&#125;
+有一个Child的Class继承于Parent
+12345class Child: Parent &#123;...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/07/07</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Swift">Swift</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2016/06/08/2016-06-08/" >
+                
+                    <span>也来写一写我理解中的代码布局、xib布局以及storyboard布局</span>
+            </a>
+            <div class="abstract-content">
+                前言
+前几天在CocoaChina上看了一篇关于代码布局、xib布局以及storyboard布局的争论，我也参与了其中，大半夜的写出了我自己的理解，结果一个误操作，打了十几分钟的字，就被自己丢失掉了（哎，再一次上了没有保存的当！）。不过本着要发表点自己意见的心态， 还是再次花了十几分钟，重新发表了自己的想法。自己总算参与了iOS开发大军的互喷中。
+为什么有人不喜欢xib和storyboard？
+看了网上很多人的评论，我总结了下，90%的开发认为：
+
+xib和storyboard布局，没有代码布局看着方便，在xib和storyboard上看UI布局的比较费时；
+xib和storyboard...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/06/08</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "UI布局">UI布局</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2011/01/15/2011-01-15/" >
+                
+                    <span>C++ 字符串比较 汇编代码实现</span>
+            </a>
+            <div class="abstract-content">
+                前言
+导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子
+正文
+123456789101112131415161718192021int asmCmp(char* str1, char*str2)&#123;    _asm&#123;        mov eax, str1            mov ebx, str2s1:        mov cl, [ebx]        cmp [eax], cl            jne ret2            cmp cl, 0            je ret1            add eax, 1  ...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2011/01/15</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C++和汇编">C++和汇编</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2011/01/15/2011-01-16/" >
+                
+                    <span>C++ 字符串拷贝 汇编代码实现</span>
+            </a>
+            <div class="abstract-content">
+                前言
+导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子
+正文
+123456789101112131415161718void asmCpy(char* str1, char* str2)&#123;    _asm&#123;        mov eax, str1	//将str1的地址赋值给eax        mov ecx, str2	//将str2的地址赋值给ecxs1:        mov bl, [eax]	//去eax地址所指向的值，赋值给bl        cmp [eax], 0	//比较当前这个字符是不是NULL        je end1		//如果...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2011/01/15</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C++和汇编">C++和汇编</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2010/09/29/2010-09-29/" >
+                
+                    <span>C++前向声明隐含的问题</span>
+            </a>
+            <div class="abstract-content">
+                前言
+导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子
+正文
+今天写代码的时候，遇到了一个很神奇的问题，在代码编译的时候很正常，编译成功。
+但是运行的时候，问题就出来了。
+B *b;
+我在代码中A *a = b-&gt;constructA();（constructA()在内部调用new，创建一个新的A的实例）
+即由类B的对象b生成一个类A的对象a，这里没有问题，
+我在这里什么都不做，直接调用delete a；
+神奇的时刻到来了，程序直接崩溃。
+经过几个小时的分析是因为include和前向声明的问题。
+1234A.h:class A&#123;...&#125;
+1234567...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2010/09/29</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C++和汇编">C++和汇编</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
+</main>
+            <!-- profile -->
+            
+            <div class="profile">
+    <img class="profile-avatar" src= /avatar/Misaka.jpg >
+    <div class="profile-name">成都老刘</div>
+    
+    <div class="profile-signature">
+        来自西南利亚的冷空气
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/20/2018-03-20/" data-id="cjfm06em40009rypw18g3023s" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS-优化/">iOS 优化</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2016-08-21" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/21/2016-08-21/" class="article-date">
-  <time datetime="2016-08-21T04:30:11.000Z" itemprop="datePublished">2016-08-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
     
     
-      <header class="article-header">
+    <div class="profile-social">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/21/2016-08-21/">Swift中的闭包定义</a>
-    </h1>
-  
-
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="定义闭包变量"><a href="#定义闭包变量" class="headerlink" title="定义闭包变量"></a>定义闭包变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var closureName: (ParameterTypes) -&gt; (ReturnType)</span><br></pre></td></tr></table></figure>
-<h4 id="定义可选闭包变量"><a href="#定义可选闭包变量" class="headerlink" title="定义可选闭包变量"></a>定义可选闭包变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var closureName: ((ParameterTypes) -&gt; (ReturnType))?</span><br></pre></td></tr></table></figure>
-<h4 id="定义闭包别名"><a href="#定义闭包别名" class="headerlink" title="定义闭包别名"></a>定义闭包别名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typealias ClosureType = (ParameterTypes) -&gt; (ReturnType)</span><br></pre></td></tr></table></figure>
-<h4 id="定义闭包常量"><a href="#定义闭包常量" class="headerlink" title="定义闭包常量"></a>定义闭包常量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let closureName: ClosureType = &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="在函数内部"><a href="#在函数内部" class="headerlink" title="在函数内部"></a>在函数内部</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">funcName(&#123;(ParameterTypes) -&gt; (ReturnType) in statements&#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="作为函数参数"><a href="#作为函数参数" class="headerlink" title="作为函数参数"></a>作为函数参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.sort(&#123; (item1: Int, item2: Int) -&gt; Bool in return item1 &lt; item2 &#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="作为函数参数-隐式参数类型"><a href="#作为函数参数-隐式参数类型" class="headerlink" title="作为函数参数(隐式参数类型)"></a>作为函数参数(隐式参数类型)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.sort(&#123; (item1, item2) -&gt; Bool in return item1 &lt; item2 &#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="作为函数参数-隐式参数类型、隐式返回类型"><a href="#作为函数参数-隐式参数类型、隐式返回类型" class="headerlink" title="作为函数参数(隐式参数类型、隐式返回类型)"></a>作为函数参数(隐式参数类型、隐式返回类型)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.sort(&#123; (item1, item2) in return item1 &lt; item2 &#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="作为函数最后的参数"><a href="#作为函数最后的参数" class="headerlink" title="作为函数最后的参数"></a>作为函数最后的参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.sort &#123; (item1, item2) in return item1 &lt; item2 &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="作为函数最后的参数-使用简略参数命名方式"><a href="#作为函数最后的参数-使用简略参数命名方式" class="headerlink" title="作为函数最后的参数(使用简略参数命名方式)"></a>作为函数最后的参数(使用简略参数命名方式)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.sort &#123; return $0 &lt; $1 &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="作为函数最后的参数-隐式返回值"><a href="#作为函数最后的参数-隐式返回值" class="headerlink" title="作为函数最后的参数(隐式返回值)"></a>作为函数最后的参数(隐式返回值)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.sort &#123; $0 &lt; $1 &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="作为函数最后的参数-as-a-reference-to-an-existing-function"><a href="#作为函数最后的参数-as-a-reference-to-an-existing-function" class="headerlink" title="作为函数最后的参数(as a reference to an existing function)"></a>作为函数最后的参数(as a reference to an existing function)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.sort(&lt;)</span><br></pre></td></tr></table></figure>
+        
+            
+                <a href="mailto:23775517@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mykoma" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
 
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/21/2016-08-21/" data-id="cjfm06em30008rypwq2pv9755" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2016-07-07" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/07/2016-07-07/" class="article-date">
-  <time datetime="2016-07-07T08:02:10.000Z" itemprop="datePublished">2016-07-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
     
     
-      <header class="article-header">
+        <div class="friends">
+            <div>FRIENDS</div>
+            
+                
+            
+                
+            
+                
+            
+        </div>
+    
+    
+        <div class="about-me">
+            <a href = "/about" >ABOUT ME</a>
+        </div>
+    
+</div>
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/07/2016-07-07/">Swift中的init</a>
-    </h1>
-  
-
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近总算开始做新项目， 语言肯定的选Swift了。问题一个接一个，不过还好，来一个解决一个。<br>今天遇到了Swift中的init的问题， 用Xcode也没有自动补全，也没有看到相关init的东西，所以对init构造过程进行一个分析。</p>
-<h3 id="两个类"><a href="#两个类" class="headerlink" title="两个类"></a>两个类</h3><p>有一个Parent的Class</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Parent: NSObject &#123;</span><br><span class="line">	override init() &#123;</span><br><span class="line">		NSLog(&quot;Parent Init&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有一个Child的Class继承于Parent</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Child: Parent &#123;</span><br><span class="line">	override init() &#123;</span><br><span class="line">		NSLog(&quot;Child Init&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="调用代码"><a href="#调用代码" class="headerlink" title="调用代码"></a>调用代码</h3><p>在其他的某个类中，初始化一个Child对象出来，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func doSomething() &#123;</span><br><span class="line">	Child()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于Xcode没有默认添加super.init()，所以这里到底是怎样一个逻辑过程？<br>按照我对其他语言的理解，我猜测是有两种可能情况：</p>
-<ol>
-<li>只会输出Child Init</li>
-<li>先输出Parent Init，然后输出Child Init”</li>
-</ol>
-<h3 id="运行代码"><a href="#运行代码" class="headerlink" title="运行代码"></a>运行代码</h3><p>代码的运行情况出乎我的意料</p>
-<p>输出结果是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Child Init</span><br><span class="line">Parent Init</span><br></pre></td></tr></table></figure>
-<p>居然先输出Child Init。</p>
-<p>也就是说先调用了子类的init(), 然后再调用父类的init()。</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p><b>Swift中的init过程，子类如果没有调用super.init()，那么会<font color="blue">在子类的init()的<font color="red">末尾</font>隐式添加super.init()</font></b></p>
-<h3 id="我们该如何处理？"><a href="#我们该如何处理？" class="headerlink" title="我们该如何处理？"></a>我们该如何处理？</h3><p><b>一般情况，我们需要在子类的init()中，应该显式地、尽快地调用super.init()</b></p>
-<p>如上面的Child类就该写成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Child: Parent &#123;</span><br><span class="line">	override init() &#123;</span><br><span class="line">		super.init() // 显式的添加super.init()到第一行</span><br><span class="line">		NSLog(&quot;Child Init&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
+        
+            
+                <a href="mailto:23775517@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mykoma" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/07/2016-07-07/" data-id="cjfm06em00005rypw5trkcxch" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2016-06-08" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/08/2016-06-08/" class="article-date">
-  <time datetime="2016-06-07T16:02:10.000Z" itemprop="datePublished">2016-06-08</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/08/2016-06-08/">也来写一写我理解中的代码布局、xib布局以及storyboard布局</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前几天在CocoaChina上看了一篇关于代码布局、xib布局以及storyboard布局的争论，我也参与了其中，大半夜的写出了我自己的理解，结果一个误操作，打了十几分钟的字，就被自己丢失掉了（哎，再一次上了没有保存的当！）。不过本着要发表点自己意见的心态， 还是再次花了十几分钟，重新发表了自己的想法。自己总算参与了iOS开发大军的互喷中。</p>
-<h3 id="为什么有人不喜欢xib和storyboard？"><a href="#为什么有人不喜欢xib和storyboard？" class="headerlink" title="为什么有人不喜欢xib和storyboard？"></a>为什么有人不喜欢xib和storyboard？</h3><p>看了网上很多人的评论，我总结了下，90%的开发认为：</p>
-<ol>
-<li>xib和storyboard布局，没有代码布局看着方便，在xib和storyboard上看UI布局的比较费时；</li>
-<li>xib和storyboard布局，容易冲突，多人协作的时候容易抓狂；</li>
-<li>xib和storyboard布局，不方便维护，后期需求修改的时候没有代码布局修改方便；</li>
-</ol>
-<p>其他的一些观点，我就不列举了。</p>
-<p>有位朋友这样说</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对于支持xib的，我只想说，别坑自己人。</span><br><span class="line">团队开发矛盾就在这时候体现出来了。</span><br><span class="line">以后去了插件化公司你就会明白为什么不让你用xib了。</span><br><span class="line">之前公司所有分配的项目都要求打包成静态库或者动态库，而且不允许打包bundle，统一使用主框架下的图片。</span><br><span class="line">我看看你们傻眼不？</span><br></pre></td></tr></table></figure>
-<p>对于这位朋友的观点，我的想法是类似于架构设计，要有远见，但是也不能过度设计。因地制宜，杀鸡不用牛刀。</p>
-<h3 id="我自己的一些观点"><a href="#我自己的一些观点" class="headerlink" title="我自己的一些观点"></a>我自己的一些观点</h3><p>就个人观点， storyboard，xib 和代码， 都有各自适合的场景。</p>
-<p>在我的理解中， UI 是分成 <font color="red">UI逻辑</font>和<font color="red">UI 布局</font>， 然而， sb 和 xib，以及代码， 都只是 UI 布局这个环节。</p>
-<p>我个人倾向于 sb， 为什么呢？</p>
-<ol>
-<li>sb 更加直观， 对于整个项目来说， 一个完美的流程图及时呈现在你面前， 你肯定对 整个项目的掌握了然于胸。</li>
-<li>sb 实现起来更快。不论是添加控件，还是给控件布局，sb 都会很 nice 的。</li>
-<li>sb 减少了开发的工作。（我说的只是减少， 不是完全没了）sb 能够很好的把布局工作从代码中拿出来， 让我们的代码只专注于我们的业务和逻辑。我的开发理念是， 能少写一行代码的就不能多写一行。能把事情交给 apple 做的， 我就不会自己来做。</li>
-</ol>
-<p>和代码布局相比起来，</p>
-<ol>
-<li>代码布局不直观， 流程得看代码。（不要说整个项目都是一个人从头到尾做的，自己很清楚之类的。这儿主要讨论团队开发）</li>
-<li>代码布局太费时了。<br>用代码布局， 首先要写添加这个控件的代码， 然后写这个控件的布局，或者写约束，相对 sb 来说，的确太耗时了。<br>不过可能大家要说 sb 修改起来太麻烦了。 其实就我个人观点，sb 相对于代码来说，修改起来反而更加简单。因为要修改或者删除 sb 里面的控件的时候， 如果理不清的时候， 直接删掉所有控件， 重新添加控件， 重现布局，也不是一个多大的事。<br>然而， 如果用代码的话， 大家首先得理解这段代码的含义， 然后还要考虑这个代码能不能改， 能不能删，思考的时间绝对不少了。 而且，一般大家也不敢随便动其他人写的代码， 怕改出问题。</li>
-<li>代码布局效率高，sb 效率低。<br>我觉得编译时期， 的确 sb布局被代码完爆。 不过在运行的时候， 个人觉得差不太多， 估计代码布局会好点。但是相对于程序结构来说， 我觉得完全没必要。</li>
-<li>代码布局相对于 sb 布局的团队合作来说， 要略胜一筹。但是 sb 布局的冲突， 其实从技术上是可以规避的， 不过具体方式就不在这儿讨论了</li>
-</ol>
-<p>在 UI 的实现上，我在概念上将 UI分成 UI 逻辑和 UI 布局， 我觉得苹果之所以出 xib 和 sb，就是想把 UI 布局的工作给抽出来，让我们只关注与业务和逻辑。不要被布局给困扰。</p>
-<p>所以我在实现UI 的时候， 基本上我的代码只看得到 UI 逻辑部分， 而布局相关的代码完全没了。</p>
-<h3 id="一些大牛的观点"><a href="#一些大牛的观点" class="headerlink" title="一些大牛的观点"></a>一些大牛的观点</h3><p><a href="https://onevcat.com/2013/12/code-vs-xib-vs-storyboard/" target="_blank" rel="noopener">https://onevcat.com/2013/12/code-vs-xib-vs-storyboard/</a></p>
-<p><a href="http://blog.devtang.com/2015/03/22/ios-dev-controversy-2/" target="_blank" rel="noopener">http://blog.devtang.com/2015/03/22/ios-dev-controversy-2/</a></p>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>虽然上面我说了我个人倾向于sb，不过还是得看项目，不同的项目要因地制宜。</p>
-
-      
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/06/08/2016-06-08/" data-id="cjfm06elz0004rypw36mjfnlm" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI布局/">UI布局</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2011-01-15" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2011/01/15/2011-01-15/" class="article-date">
-  <time datetime="2011-01-15T08:21:49.000Z" itemprop="datePublished">2011-01-15</time>
-</a>
+    <!-- 不蒜子  -->
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2011/01/15/2011-01-15/">C++ 字符串比较 汇编代码实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">int asmCmp(char* str1, char*str2)&#123;</span><br><span class="line">    _asm&#123;</span><br><span class="line">        mov eax, str1</span><br><span class="line">            mov ebx, str2</span><br><span class="line">s1:</span><br><span class="line">        mov cl, [ebx]</span><br><span class="line">        cmp [eax], cl</span><br><span class="line">            jne ret2</span><br><span class="line">            cmp cl, 0</span><br><span class="line">            je ret1</span><br><span class="line">            add eax, 1</span><br><span class="line">            add ebx, 1</span><br><span class="line">            jmp s1</span><br><span class="line">ret1:</span><br><span class="line">        mov eax, 0</span><br><span class="line">            jmp end1;</span><br><span class="line">ret2:</span><br><span class="line">        mov eax, 1		//这里可能不同的编译器需要不同的代码</span><br><span class="line">end1:</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2011/01/15/2011-01-15/" data-id="cjfm06elt0001rypwmc4kf74s" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2011-01-16" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2011/01/15/2011-01-16/" class="article-date">
-  <time datetime="2011-01-15T08:20:38.000Z" itemprop="datePublished">2011-01-15</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2011/01/15/2011-01-16/">C++ 字符串拷贝 汇编代码实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">void asmCpy(char* str1, char* str2)</span><br><span class="line">&#123;</span><br><span class="line">    _asm&#123;</span><br><span class="line">        mov eax, str1	//将str1的地址赋值给eax</span><br><span class="line">        mov ecx, str2	//将str2的地址赋值给ecx</span><br><span class="line">s1:</span><br><span class="line">        mov bl, [eax]	//去eax地址所指向的值，赋值给bl</span><br><span class="line">        cmp [eax], 0	//比较当前这个字符是不是NULL</span><br><span class="line">        je end1		//如果是NULL，就是字符串结束了，跳转到end1</span><br><span class="line">			//如果不是，则继续下面的代码</span><br><span class="line">        mov [ecx], bl	//将bl里面的值赋值给ecx所指向的内存</span><br><span class="line">        add eax, 1	// eax的地址值增加1</span><br><span class="line">        add ecx, 1	// ecx的地址值增加1</span><br><span class="line">        jmp s1		// 跳到前面的循环</span><br><span class="line">end1:</span><br><span class="line">        mov [ecx], 0	//给最后一个字符设置成NULL</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2011/01/15/2011-01-16/" data-id="cjfm06elx0003rypwyi0h52ih" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2010-09-29" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2010/09/29/2010-09-29/" class="article-date">
-  <time datetime="2010-09-29T15:17:57.000Z" itemprop="datePublished">2010-09-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2010/09/29/2010-09-29/">C++前向声明隐含的问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>今天写代码的时候，遇到了一个很神奇的问题，在代码编译的时候很正常，编译成功。<br>但是运行的时候，问题就出来了。</p>
-<p>B *b;</p>
-<p>我在代码中A *a = b-&gt;constructA();（constructA()在内部调用new，创建一个新的A的实例）<br>即由类B的对象b生成一个类A的对象a，这里没有问题，<br>我在这里什么都不做，直接调用delete a；<br>神奇的时刻到来了，程序直接崩溃。</p>
-<p>经过几个小时的分析是因为include和前向声明的问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A.h:</span><br><span class="line">class A&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">B.h:</span><br><span class="line">class A;//这里前向声明A，</span><br><span class="line">class B&#123;</span><br><span class="line">    A * constrctA()&#123;</span><br><span class="line">          ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">main.cpp:</span><br><span class="line">#include &quot;B.h&quot;</span><br><span class="line">int main()&#123;</span><br><span class="line">    B *b = new B;</span><br><span class="line">    A *a = b-&gt;constructA();</span><br><span class="line">    delete a;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在编译的时候，很成功，因为在B.h中，编译器找得到A这个类声明或者是定义的语句：class A;<br>因此在编译的时候，没有#include “A.h”也能够正常编译！！！问题就出在这儿了。</p>
-<p>在运行的时候，A *a = b-&gt;constructA();没问题<br>然后这儿的A并没有实现，他并没有任何函数，<br>当我调用delete a；的时候，会自动调用析构函数，这样根本就找不到析构函数，</p>
-<p>所以，程序在运行delete a；的时候会crash。</p>
-<p>解决的办法就是添加#include “A.h”</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2010/09/29/2010-09-29/" data-id="cjfm06elp0000rypw6uhdyxvv" class="article-share-link">Teilen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-和汇编/">C++和汇编</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Objective-C/">Objective-C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swift/">Swift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI布局/">UI布局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS-优化/">iOS 优化</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/C-和汇编/" style="font-size: 20px;">C++和汇编</a> <a href="/tags/Objective-C/" style="font-size: 10px;">Objective-C</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/UI布局/" style="font-size: 10px;">UI布局</a> <a href="/tags/iOS-优化/" style="font-size: 10px;">iOS 优化</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/01/">January 2011</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/04/02/2018-04-02/">再总结一下NSString 与 NSMutableString 的 property 约束</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/20/2018-03-20/">优化之离屏渲染</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/21/2016-08-21/">Swift中的闭包定义</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/07/2016-07-07/">Swift中的init</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/08/2016-06-08/">也来写一写我理解中的代码布局、xib布局以及storyboard布局</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Gang Liu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    <!-- toc -->
     
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 8 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href= "/2018/04/02/2018-04-02/" >再总结一下NSString 与 NSMutableString 的 property 约束</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2018/03/20/2018-03-20/" >优化之离屏渲染</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/21</span><a class="archive-post-title" href= "/2016/08/21/2016-08-21/" >Swift中的闭包定义</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/07</span><a class="archive-post-title" href= "/2016/07/07/2016-07-07/" >Swift中的init</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2016/06/08/2016-06-08/" >也来写一写我理解中的代码布局、xib布局以及storyboard布局</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2011 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-16/" >C++ 字符串拷贝 汇编代码实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-15/" >C++ 字符串比较 汇编代码实现</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2010 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2010/09/29/2010-09-29/" >C++前向声明隐含的问题</a>
+        </li>
+    
+    </div>
   </div>
-</body>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="C++和汇编"><span class="iconfont-archer">&#xe606;</span>C++和汇编</span>
+    
+        <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
+    
+        <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
+    
+        <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
+    
+        <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'Gang Liu'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+    </body>
 </html>
+
+
