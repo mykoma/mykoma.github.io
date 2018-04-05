@@ -365,10 +365,10 @@ height:50vh;
 <p>NSMutableString 如果使用 copy 的话，将一个外部对象赋值给这个属性的时候， 会进行一次 copy 操作， 然而 copy 是拷贝出一个不可变的对象给属性（实际上应该调用 mutableCopy，但是@property 并没有 mutableCopy），如果之后对这个属性（实际上是一个不可变的对象）进行可变协议的调用， 那么程序就会崩溃。</p>
 <h4>总结</h4>
 <p>和 NSString 与 NSMutableString 类似，NSArray 与 NSMutableArray， NSDictionary 与 NSMutableDictiontary也与以上运行效果一致。</p>
-<ol>
+<ul>
 <li><strong>NSString, NSArray 与 NSDictionary 使用 copy；</strong></li>
 <li><strong>NSMutableString, NSMutableArray 与 NSMutableDictionary使用 strong。</strong></li>
-</ol>
+</ul>
 
     </article>
     <!-- 前后页  -->
