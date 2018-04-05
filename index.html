@@ -323,7 +323,7 @@ height:50vh;
                 之前在网上看了很多关于 NSString 的 property 约束，不过总感觉总结得没那么直接。这里我再重复的总结一下。
 对于 NSString 来说，到底用 copy 还是 strong?
 看看下面的代码：
-123456789@interface Test: NSObject@property (nonatomic, strong) NSString * string;@end  NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];  Test * test = [Test new];  test.string = aS...
+1234567891011@interface Test: NSObject@property (nonatomic, strong) NSString * string;@end// Some Code here …………NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];Test * test = [Test n...
             </div>
             <div class="abstract-post-meta">
                 <!-- date  -->
