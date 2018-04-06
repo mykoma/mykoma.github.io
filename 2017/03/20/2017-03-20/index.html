@@ -247,7 +247,7 @@ height:50vh;
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2018/03/20</span>
+                <span class="post-intro-time">2017/03/20</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -362,7 +362,7 @@ height:50vh;
 <blockquote>
 <p>CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。</p>
 </blockquote>
-<p><img src="./pics/2018-03-20/ios_screen_scan.png" alt=""></p>
+<p><img src="./pics/2017-03-20/ios_screen_scan.png" alt=""></p>
 <blockquote>
 <p>在最简单的情况下，帧缓冲区只有一个，这时帧缓冲区的读取和刷新都都会有比较大的效率问题。为了解决效率问题，显示系统通常会引入两个缓冲区，即双缓冲机制。在这种情况下，GPU 会预先渲染好一帧放入一个缓冲区内，让视频控制器读取，当下一帧渲染好后，GPU 会直接把视频控制器的指针指向第二个缓冲器。如此一来效率会有很大的提升。</p>
 </blockquote>
@@ -386,7 +386,7 @@ height:50vh;
 <li>在backing store写完后，通过render server交给GPU去渲染，将backing store中的bitmap数据显示在屏幕上</li>
 </ol>
 </blockquote>
-<p><img src="./pics/2018-03-20/uiview_render.png" alt=""></p>
+<p><img src="./pics/2017-03-20/uiview_render.png" alt=""></p>
 <p>当我们在使用<strong>透明度（alapha）</strong>、<strong>corner（圆角）</strong>、<strong>shadow（阴影）</strong>、<strong>edge antialiasing（抗锯齿）<strong>和</strong>mask</strong>等视图功能的时候，由于图层不是那种简单的覆盖，而是需要额外计算图层的显示关系，由于当前已经是 GPU 渲染了，所以在 GPU 的当前屏幕缓冲区外，新建了一个缓冲区，在这个缓冲区中，去进行这些额外的渲染，这就是离屏渲染。</p>
 <ol>
 <li>创建离屏缓冲区是一个代价是很大的。</li>
@@ -404,7 +404,7 @@ height:50vh;
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/04/02/2018-04-02/" title= 再总结一下NSString 与 NSMutableString 的 property 约束 >
+                <a href= "/2017/04/02/2017-04-02/" title= 再总结一下NSString 与 NSMutableString 的 property 约束 >
                     <div class="nextTitle">再总结一下NSString 与 NSMutableString 的 property 约束</div>
                 </a>
             
@@ -637,16 +637,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-archive"> Total : 8 </div>
     
     <div class="post-archive">
@@ -654,17 +644,17 @@ top:50vh;
     
     
     
-    <div class="archive-year"> 2018 </div>
+    <div class="archive-year"> 2017 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/02</span><a class="archive-post-title" href= "/2018/04/02/2018-04-02/" >再总结一下NSString 与 NSMutableString 的 property 约束</a>
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href= "/2017/04/02/2017-04-02/" >再总结一下NSString 与 NSMutableString 的 property 约束</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2018/03/20/2018-03-20/" >优化之离屏渲染</a>
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2017/03/20/2017-03-20/" >优化之离屏渲染</a>
         </li>
     
     
@@ -731,13 +721,13 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="C++和汇编"><span class="iconfont-archer">&#xe606;</span>C++和汇编</span>
     
-        <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
-    
         <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
     
         <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
     
         <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
+    
+        <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
