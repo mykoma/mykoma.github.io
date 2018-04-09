@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-06T12:04:41.269Z</updated>
+  <updated>2018-04-09T10:08:14.667Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Shadowsocks 科学上网利器</title>
+    <link href="http://yoursite.com/2018/01/01/2018-01-01/"/>
+    <id>http://yoursite.com/2018/01/01/2018-01-01/</id>
+    <published>2018-01-01T02:12:44.000Z</published>
+    <updated>2018-04-09T10:08:14.667Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Shadowsocks：科学上网利器</p></blockquote><ul><li><a href="https://shadowsocks.org" target="_blank" rel="noopener">shadowsocks</a></li></ul><h2>安装</h2><p>Mac和Linux都默认有Python环境，直接使用Python的包管理器pip安装shadowsocks。</p><p>首先，下载pip的自动安装脚本 https://bootstrap.pypa.io/get-pip.py</p><ul><li>安装shadowsocks</li></ul><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo python get-pip.py</span><br><span class="line">$ sudo pip install shadowsocks</span><br></pre></td></tr></table></figure></p><ul><li>添加配置文件，可根据自己的设置选择路径，当前选择把 ss.config 放在 root 路径</li></ul><p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"server"</span>:<span class="string">"119.28.12.237"</span>,</span><br><span class="line">  <span class="attr">"server_port"</span>:<span class="number">51236</span>,</span><br><span class="line">  <span class="attr">"local_address"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="attr">"local_port"</span>:<span class="number">1080</span>,</span><br><span class="line">  <span class="attr">"password"</span>:<span class="string">"NdPaStaBLEyA"</span>,</span><br><span class="line">  <span class="attr">"timeout"</span>:<span class="number">60</span>,</span><br><span class="line">  <span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,</span><br><span class="line">  <span class="attr">"workers"</span>:<span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><ul><li>启动和关闭（ss.config在 root 目录下）</li></ul><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudosslocal-c ss.config -dstart</span><br><span class="line">$ sudosslocal-c ss.config -dstop</span><br></pre></td></tr></table></figure></p><h4>配置</h4><p>配置文件：ss.config</p><h2>使用</h2><h3>SwitchyOmega</h3><p>下载Chrome插件：<a href="https://github.com/FelisCatus/SwitchyOmega/releases" target="_blank" rel="noopener">SwitchyOmega.crx</a>，进行本地安装。</p><h4>配置Profile</h4><p>根据以上配置设置：</p><ul><li>Protocol: SOCKS5</li><li>Server: 127.0.0.1</li><li>Port: 1080</li></ul><p><img src="/2018/01/01/2018-01-01/1.png" alt="Picture description"></p><h4>配置自动切换</h4><blockquote><p>根据规则自动切换使用代理，实现访问限制网站走代理，国内网站直连。</p></blockquote><ul><li>Rule List Format: AutoProxy</li><li>Rule List Url: https://raw.githubusercontent.com/calfzhou/autoproxy-gfwlist/master/gfwlist.txt</li></ul><p><img src="/2018/01/01/2018-01-01/2.png" alt="Picture description"></p><h4>使用SwitchyOmega</h4><p><img src="/2018/01/01/2018-01-01/3.png" alt="Picture description"></p><h2>免费ss账号</h2><ul><li>https://github.com/Alvin9999/new-pac/wiki/%E8%87%AA%E5%BB%BAss%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B</li><li>https://freessr.win/</li></ul><h2>参考</h2><ul><li>Shadowsocks: https://shadowsocks.org/</li><li>Shadowsocks @Github: https://github.com/shadowsocks/shadowsocks</li><li>SwitchyOmega @Webstore: https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif</li><li>SwitchyOmega @Github: https://github.com/FelisCatus/SwitchyOmega/releases</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;Shadowsocks：科学上网利器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://shadowsocks.org&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;shadowsocks&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="VPN" scheme="http://yoursite.com/tags/VPN/"/>
+    
+  </entry>
   
   <entry>
     <title>再总结一下NSString 与 NSMutableString 的 property 约束</title>
