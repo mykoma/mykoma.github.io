@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>成都老刘的技术小窝</title>
+    <title>NSTimer 不用的时候为什么需要调用invalidate？ · 成都老刘的技术小窝</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522950354149&di=2abb057a40aedc4f304a1aa11796b590&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Ffj%2Fpics%2Fhv1%2F162%2F192%2F1501%2F97651647.jpg>
     <script>
@@ -175,12 +177,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >成都老刘的技术小窝</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">NSTimer 不用的时候为什么需要调用invalidate？</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>成都老刘的技术小窝</a>
 </header>
@@ -194,24 +207,67 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1822516668,2307386487&fm=27&gp=0.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            NSTimer 不用的时候为什么需要调用invalidate？
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/09/13</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -295,40 +351,78 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/03/20/2017-03-20/" >
-                
-                    <span>优化之离屏渲染</span>
-            </a>
-            <div class="abstract-content">
-                这篇文章主要是总结一下我对离屏渲染的理解，之前一直不太理解离屏渲染到底是个什么，也不太理解为什么他会引起滚动界面卡顿，一直也没有去深入了解，自己也深感惭愧。以前看到了@ibireme写的iOS 保持界面流畅的技巧这篇文章，里面也描述了下屏幕显示原理。现在再次深入阅读，才比较理解离屏渲染到底是怎么回事。
-屏幕显示原理
-引用一下@ibireme的原文
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>最近在调试 NSTimer，发现了一些有趣的东西，在此文分析研究一下。</p>
+<h3>问题</h3>
+<p>当我有一个 viewController，持有了一个 timer, 当是不需要使用 timer 的时候，我能不能只调用 <code>self.timer = nil;</code>？</p>
+<h3>什么是 NSTimer？</h3>
+<p>根据 Apple 的开源代码 <a href="https://opensource.apple.com/source/CF/CF-1153.18/CFRunLoop.c" target="_blank" rel="noopener">CFRunLoop.c</a> 的定义，NSTimer 对应着一个 __CFRunLoopTimer 的结构体，具体代码如下：</p>
+<h4>__CFRunLoopTimer</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">struct __CFRunLoopTimer &#123;</span><br><span class="line">    CFRuntimeBase _base;</span><br><span class="line">    uint16_t _bits;</span><br><span class="line">    pthread_mutex_t _lock;</span><br><span class="line">    CFRunLoopRef _runLoop;</span><br><span class="line">    CFMutableSetRef _rlModes;</span><br><span class="line">    CFAbsoluteTime _nextFireDate;</span><br><span class="line">    CFTimeInterval _interval;		/* immutable */</span><br><span class="line">    CFTimeInterval _tolerance;          /* mutable */</span><br><span class="line">    uint64_t _fireTSR;			/* TSR units */</span><br><span class="line">    CFIndex _order;			/* immutable */</span><br><span class="line">    CFRunLoopTimerCallBack _callout;	/* immutable */</span><br><span class="line">    CFRunLoopTimerContext _context;	/* immutable, except invalidation */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到 __CFRunLoopTimer 里面有一个<code>CFRunLoopRef _runLoop</code>，这个表示 timer 是属于哪一个 runLoop 的，而里面的<code>CFMutableSetRef _rlModes</code>则表示这个 timer 是在 runLoop 的哪些 mode（__CFRunLoopMode） 中生效。</p>
+<p>同时我们也能看到 __CFRunLoopTimer（即 NSTimer） 使用的是 pthread_mutex_t 锁。</p>
+<h4>__CFRunLoopMode</h4>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">struct __CFRunLoopMode &#123;</span><br><span class="line">    CFRuntimeBase _base;</span><br><span class="line">    pthread_mutex_t _lock;	/* must have the run loop locked before locking this */</span><br><span class="line">    CFStringRef _name;</span><br><span class="line">    Boolean _stopped;</span><br><span class="line">    char _padding[3];</span><br><span class="line">    CFMutableSetRef _sources0;</span><br><span class="line">    CFMutableSetRef _sources1;</span><br><span class="line">    CFMutableArrayRef _observers;</span><br><span class="line">    CFMutableArrayRef _timers;</span><br><span class="line">    CFMutableDictionaryRef _portToV1SourceMap;</span><br><span class="line">    __CFPortSet _portSet;</span><br><span class="line">    CFIndex _observerMask;</span><br><span class="line">#if USE_DISPATCH_SOURCE_FOR_TIMERS</span><br><span class="line">    dispatch_source_t _timerSource;</span><br><span class="line">    dispatch_queue_t _queue;</span><br><span class="line">    Boolean _timerFired; // set to true by the source when a timer has fired</span><br><span class="line">    Boolean _dispatchTimerArmed;</span><br><span class="line">#endif</span><br><span class="line">#if USE_MK_TIMER_TOO</span><br><span class="line">    mach_port_t _timerPort;</span><br><span class="line">    Boolean _mkTimerArmed;</span><br><span class="line">#endif</span><br><span class="line">#if DEPLOYMENT_TARGET_WINDOWS</span><br><span class="line">    DWORD _msgQMask;</span><br><span class="line">    void (*_msgPump)(void);</span><br><span class="line">#endif</span><br><span class="line">    uint64_t _timerSoftDeadline; /* TSR */</span><br><span class="line">    uint64_t _timerHardDeadline; /* TSR */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>从 __CFRunLoopMode 的源代码中， 我们可看到里面包含着一个<code>CFMutableArrayRef _timers</code>，也就是说 runLoopMode 有一个存放 timer 的数组，即当我们指定一个 timer 的 runLoopMode 的时候，<code>[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode]</code>， 会把这个 timer 放入相应的 runLoopMode 对象中。也就是说这个 runLoopMode 对象里面的 _timers 数组，会持有这个 timer 对象。这一点可以从 Xcode 的 Memory Graph中看到
+<img src="/2017/09/13/2017-09-13/1.jpg" alt="Picture description">
+当我们不需要一个 timer 的时候，我们是使用 NSTimer 的一个方法 <code>invalidate</code> 来进行解除所有和这个 timer 相关的持有关系。</p>
+<p>同样我们也能看到 __CFRunLoopMode 使用的也是 pthread_mutex_t 锁。</p>
+<h4>回答前面的问题</h4>
+<p><strong>当我有一个 viewController，持有了一个 timer, 我能不能只调用 <code>self.timer = nil;</code>?</strong></p>
+<blockquote>
+<p>不能，因为 <code>self.timer = nil;</code> 只是解除了 viewController 持有 timer，但是并没有解除 runLoopMode 里面的数组持有 timer 的关系，所以必须调用invalidate来解除所有和 timer 相关的关系。</p>
+</blockquote>
 
-首先从过去的 CRT 显示器原理说起。CRT 的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或者其他硬件）会用硬件时钟...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/20</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/01/01/2018-01-01/" title= Shadowsocks 科学上网利器 >
+                    <div class="nextTitle">Shadowsocks 科学上网利器</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2017/04/02/2017-04-02/" title= 再总结一下NSString 与 NSMutableString 的 property 约束 >
+                    <div class="prevTitle">再总结一下NSString 与 NSMutableString 的 property 约束</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC8zNTQ5My8xMjAyOQ==>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS 优化">iOS 优化</a>
     
-</div>
-                
-            </div>
-        </article>
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -398,6 +492,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">什么是 NSTimer？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">__CFRunLoopTimer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">__CFRunLoopMode</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">回答前面的问题</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -721,6 +833,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>

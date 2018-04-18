@@ -342,6 +342,38 @@ Mac和Linux都默认有Python环境，直接使用Python的包管理器pip安装
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2017/09/13/2017-09-13/" >
+                
+                    <span>NSTimer 不用的时候为什么需要调用invalidate？</span>
+            </a>
+            <div class="abstract-content">
+                最近在调试 NSTimer，发现了一些有趣的东西，在此文分析研究一下。
+问题
+当我有一个 viewController，持有了一个 timer, 当是不需要使用 timer 的时候，我能不能只调用 self.timer = nil;？
+什么是 NSTimer？
+根据 Apple 的开源代码 CFRunLoop.c 的定义，NSTimer 对应着一个 __CFRunLoopTimer 的结构体，具体代码如下：
+__CFRunLoopTimer
+1234567891011121314struct __CFRunLoopTimer &#123;    CFRuntimeBase _base; ...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/09/13</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2017/04/02/2017-04-02/" >
                 
                     <span>再总结一下NSString 与 NSMutableString 的 property 约束</span>
@@ -799,7 +831,30 @@ B *b;
     
     
     
-    <div class="total-archive"> Total : 9 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 10 </div>
     
     <div class="post-archive">
     
@@ -822,6 +877,11 @@ B *b;
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/13</span><a class="archive-post-title" href= "/2017/09/13/2017-09-13/" >NSTimer 不用的时候为什么需要调用invalidate？</a>
+        </li>
     
     
         <li class="archive-post-item">

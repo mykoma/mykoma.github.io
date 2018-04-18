@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://wwhy.tech/"/>
   <updated>2018-04-09T10:25:29.200Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://wwhy.tech/</id>
   
   <author>
     <name>Gang Liu</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Shadowsocks 科学上网利器</title>
-    <link href="http://yoursite.com/2018/01/01/2018-01-01/"/>
-    <id>http://yoursite.com/2018/01/01/2018-01-01/</id>
+    <link href="http://wwhy.tech/2018/01/01/2018-01-01/"/>
+    <id>http://wwhy.tech/2018/01/01/2018-01-01/</id>
     <published>2018-01-01T02:12:44.000Z</published>
     <updated>2018-04-09T10:25:29.200Z</updated>
     
@@ -39,14 +39,39 @@
     </summary>
     
     
-      <category term="VPN" scheme="http://yoursite.com/tags/VPN/"/>
+      <category term="VPN" scheme="http://wwhy.tech/tags/VPN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NSTimer 不用的时候为什么需要调用invalidate？</title>
+    <link href="http://wwhy.tech/2017/09/13/2017-09-13/"/>
+    <id>http://wwhy.tech/2017/09/13/2017-09-13/</id>
+    <published>2017-09-13T14:13:03.000Z</published>
+    <updated>2018-04-18T16:01:13.940Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在调试 NSTimer，发现了一些有趣的东西，在此文分析研究一下。</p><h3>问题</h3><p>当我有一个 viewController，持有了一个 timer, 当是不需要使用 timer 的时候，我能不能只调用 <code>self.timer = nil;</code>？</p><h3>什么是 NSTimer？</h3><p>根据 Apple 的开源代码 <a href="https://opensource.apple.com/source/CF/CF-1153.18/CFRunLoop.c" target="_blank" rel="noopener">CFRunLoop.c</a> 的定义，NSTimer 对应着一个 __CFRunLoopTimer 的结构体，具体代码如下：</p><h4>__CFRunLoopTimer</h4><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">struct __CFRunLoopTimer &#123;</span><br><span class="line">    CFRuntimeBase _base;</span><br><span class="line">    uint16_t _bits;</span><br><span class="line">    pthread_mutex_t _lock;</span><br><span class="line">    CFRunLoopRef _runLoop;</span><br><span class="line">    CFMutableSetRef _rlModes;</span><br><span class="line">    CFAbsoluteTime _nextFireDate;</span><br><span class="line">    CFTimeInterval _interval;/* immutable */</span><br><span class="line">    CFTimeInterval _tolerance;          /* mutable */</span><br><span class="line">    uint64_t _fireTSR;/* TSR units */</span><br><span class="line">    CFIndex _order;/* immutable */</span><br><span class="line">    CFRunLoopTimerCallBack _callout;/* immutable */</span><br><span class="line">    CFRunLoopTimerContext _context;/* immutable, except invalidation */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><p>可以看到 __CFRunLoopTimer 里面有一个<code>CFRunLoopRef _runLoop</code>，这个表示 timer 是属于哪一个 runLoop 的，而里面的<code>CFMutableSetRef _rlModes</code>则表示这个 timer 是在 runLoop 的哪些 mode（__CFRunLoopMode） 中生效。</p><p>同时我们也能看到 __CFRunLoopTimer（即 NSTimer） 使用的是 pthread_mutex_t 锁。</p><h4>__CFRunLoopMode</h4><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">struct __CFRunLoopMode &#123;</span><br><span class="line">    CFRuntimeBase _base;</span><br><span class="line">    pthread_mutex_t _lock;/* must have the run loop locked before locking this */</span><br><span class="line">    CFStringRef _name;</span><br><span class="line">    Boolean _stopped;</span><br><span class="line">    char _padding[3];</span><br><span class="line">    CFMutableSetRef _sources0;</span><br><span class="line">    CFMutableSetRef _sources1;</span><br><span class="line">    CFMutableArrayRef _observers;</span><br><span class="line">    CFMutableArrayRef _timers;</span><br><span class="line">    CFMutableDictionaryRef _portToV1SourceMap;</span><br><span class="line">    __CFPortSet _portSet;</span><br><span class="line">    CFIndex _observerMask;</span><br><span class="line">#if USE_DISPATCH_SOURCE_FOR_TIMERS</span><br><span class="line">    dispatch_source_t _timerSource;</span><br><span class="line">    dispatch_queue_t _queue;</span><br><span class="line">    Boolean _timerFired; // set to true by the source when a timer has fired</span><br><span class="line">    Boolean _dispatchTimerArmed;</span><br><span class="line">#endif</span><br><span class="line">#if USE_MK_TIMER_TOO</span><br><span class="line">    mach_port_t _timerPort;</span><br><span class="line">    Boolean _mkTimerArmed;</span><br><span class="line">#endif</span><br><span class="line">#if DEPLOYMENT_TARGET_WINDOWS</span><br><span class="line">    DWORD _msgQMask;</span><br><span class="line">    void (*_msgPump)(void);</span><br><span class="line">#endif</span><br><span class="line">    uint64_t _timerSoftDeadline; /* TSR */</span><br><span class="line">    uint64_t _timerHardDeadline; /* TSR */</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><p>从 __CFRunLoopMode 的源代码中， 我们可看到里面包含着一个<code>CFMutableArrayRef _timers</code>，也就是说 runLoopMode 有一个存放 timer 的数组，即当我们指定一个 timer 的 runLoopMode 的时候，<code>[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode]</code>， 会把这个 timer 放入相应的 runLoopMode 对象中。也就是说这个 runLoopMode 对象里面的 _timers 数组，会持有这个 timer 对象。这一点可以从 Xcode 的 Memory Graph中看到<img src="/2017/09/13/2017-09-13/1.jpg" alt="Picture description">当我们不需要一个 timer 的时候，我们是使用 NSTimer 的一个方法 <code>invalidate</code> 来进行解除所有和这个 timer 相关的持有关系。</p><p>同样我们也能看到 __CFRunLoopMode 使用的也是 pthread_mutex_t 锁。</p><h4>回答前面的问题</h4><p><strong>当我有一个 viewController，持有了一个 timer, 我能不能只调用 <code>self.timer = nil;</code>?</strong></p><blockquote><p>不能，因为 <code>self.timer = nil;</code> 只是解除了 viewController 持有 timer，但是并没有解除 runLoopMode 里面的数组持有 timer 的关系，所以必须调用invalidate来解除所有和 timer 相关的关系。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近在调试 NSTimer，发现了一些有趣的东西，在此文分析研究一下。&lt;/p&gt;
+&lt;h3&gt;问题&lt;/h3&gt;
+&lt;p&gt;当我有一个 viewController，持有了一个 timer, 当是不需要使用 timer 的时候，我能不能只调用 &lt;code&gt;self.timer = nil
+      
+    
+    </summary>
+    
+    
+      <category term="Objective-C" scheme="http://wwhy.tech/tags/Objective-C/"/>
     
   </entry>
   
   <entry>
     <title>再总结一下NSString 与 NSMutableString 的 property 约束</title>
-    <link href="http://yoursite.com/2017/04/02/2017-04-02/"/>
-    <id>http://yoursite.com/2017/04/02/2017-04-02/</id>
+    <link href="http://wwhy.tech/2017/04/02/2017-04-02/"/>
+    <id>http://wwhy.tech/2017/04/02/2017-04-02/</id>
     <published>2017-04-02T09:43:00.000Z</published>
     <updated>2018-04-06T12:04:41.269Z</updated>
     
@@ -65,14 +90,14 @@
     </summary>
     
     
-      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+      <category term="Objective-C" scheme="http://wwhy.tech/tags/Objective-C/"/>
     
   </entry>
   
   <entry>
     <title>优化之离屏渲染</title>
-    <link href="http://yoursite.com/2017/03/20/2017-03-20/"/>
-    <id>http://yoursite.com/2017/03/20/2017-03-20/</id>
+    <link href="http://wwhy.tech/2017/03/20/2017-03-20/"/>
+    <id>http://wwhy.tech/2017/03/20/2017-03-20/</id>
     <published>2017-03-20T15:59:12.000Z</published>
     <updated>2018-04-13T15:33:35.488Z</updated>
     
@@ -88,14 +113,14 @@
     </summary>
     
     
-      <category term="iOS 优化" scheme="http://yoursite.com/tags/iOS-%E4%BC%98%E5%8C%96/"/>
+      <category term="iOS 优化" scheme="http://wwhy.tech/tags/iOS-%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>Swift中的闭包定义</title>
-    <link href="http://yoursite.com/2016/08/21/2016-08-21/"/>
-    <id>http://yoursite.com/2016/08/21/2016-08-21/</id>
+    <link href="http://wwhy.tech/2016/08/21/2016-08-21/"/>
+    <id>http://wwhy.tech/2016/08/21/2016-08-21/</id>
     <published>2016-08-21T04:30:11.000Z</published>
     <updated>2018-02-28T12:20:28.314Z</updated>
     
@@ -112,14 +137,14 @@
     </summary>
     
     
-      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+      <category term="Swift" scheme="http://wwhy.tech/tags/Swift/"/>
     
   </entry>
   
   <entry>
     <title>Swift中的init</title>
-    <link href="http://yoursite.com/2016/07/07/2016-07-07/"/>
-    <id>http://yoursite.com/2016/07/07/2016-07-07/</id>
+    <link href="http://wwhy.tech/2016/07/07/2016-07-07/"/>
+    <id>http://wwhy.tech/2016/07/07/2016-07-07/</id>
     <published>2016-07-07T08:02:10.000Z</published>
     <updated>2018-02-28T12:20:28.314Z</updated>
     
@@ -138,14 +163,14 @@
     </summary>
     
     
-      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+      <category term="Swift" scheme="http://wwhy.tech/tags/Swift/"/>
     
   </entry>
   
   <entry>
     <title>也来写一写我理解中的代码布局、xib布局以及storyboard布局</title>
-    <link href="http://yoursite.com/2016/06/08/2016-06-08/"/>
-    <id>http://yoursite.com/2016/06/08/2016-06-08/</id>
+    <link href="http://wwhy.tech/2016/06/08/2016-06-08/"/>
+    <id>http://wwhy.tech/2016/06/08/2016-06-08/</id>
     <published>2016-06-07T16:02:10.000Z</published>
     <updated>2018-02-28T12:20:28.314Z</updated>
     
@@ -162,14 +187,14 @@
     </summary>
     
     
-      <category term="UI布局" scheme="http://yoursite.com/tags/UI%E5%B8%83%E5%B1%80/"/>
+      <category term="UI布局" scheme="http://wwhy.tech/tags/UI%E5%B8%83%E5%B1%80/"/>
     
   </entry>
   
   <entry>
     <title>C++ 字符串比较 汇编代码实现</title>
-    <link href="http://yoursite.com/2011/01/15/2011-01-15/"/>
-    <id>http://yoursite.com/2011/01/15/2011-01-15/</id>
+    <link href="http://wwhy.tech/2011/01/15/2011-01-15/"/>
+    <id>http://wwhy.tech/2011/01/15/2011-01-15/</id>
     <published>2011-01-15T08:21:49.000Z</published>
     <updated>2018-02-28T12:20:28.314Z</updated>
     
@@ -188,14 +213,14 @@
     </summary>
     
     
-      <category term="C++和汇编" scheme="http://yoursite.com/tags/C-%E5%92%8C%E6%B1%87%E7%BC%96/"/>
+      <category term="C++和汇编" scheme="http://wwhy.tech/tags/C-%E5%92%8C%E6%B1%87%E7%BC%96/"/>
     
   </entry>
   
   <entry>
     <title>C++ 字符串拷贝 汇编代码实现</title>
-    <link href="http://yoursite.com/2011/01/15/2011-01-16/"/>
-    <id>http://yoursite.com/2011/01/15/2011-01-16/</id>
+    <link href="http://wwhy.tech/2011/01/15/2011-01-16/"/>
+    <id>http://wwhy.tech/2011/01/15/2011-01-16/</id>
     <published>2011-01-15T08:20:38.000Z</published>
     <updated>2018-02-28T12:20:28.313Z</updated>
     
@@ -214,14 +239,14 @@
     </summary>
     
     
-      <category term="C++和汇编" scheme="http://yoursite.com/tags/C-%E5%92%8C%E6%B1%87%E7%BC%96/"/>
+      <category term="C++和汇编" scheme="http://wwhy.tech/tags/C-%E5%92%8C%E6%B1%87%E7%BC%96/"/>
     
   </entry>
   
   <entry>
     <title>C++前向声明隐含的问题</title>
-    <link href="http://yoursite.com/2010/09/29/2010-09-29/"/>
-    <id>http://yoursite.com/2010/09/29/2010-09-29/</id>
+    <link href="http://wwhy.tech/2010/09/29/2010-09-29/"/>
+    <id>http://wwhy.tech/2010/09/29/2010-09-29/</id>
     <published>2010-09-29T15:17:57.000Z</published>
     <updated>2018-02-28T12:20:28.313Z</updated>
     
@@ -243,7 +268,7 @@
     </summary>
     
     
-      <category term="C++和汇编" scheme="http://yoursite.com/tags/C-%E5%92%8C%E6%B1%87%E7%BC%96/"/>
+      <category term="C++和汇编" scheme="http://wwhy.tech/tags/C-%E5%92%8C%E6%B1%87%E7%BC%96/"/>
     
   </entry>
   

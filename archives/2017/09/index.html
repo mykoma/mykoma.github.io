@@ -300,27 +300,29 @@
     
     
         <article class="index-post">
-            <a class="abstract-title" href = "/2017/03/20/2017-03-20/" >
+            <a class="abstract-title" href = "/2017/09/13/2017-09-13/" >
                 
-                    <span>优化之离屏渲染</span>
+                    <span>NSTimer 不用的时候为什么需要调用invalidate？</span>
             </a>
             <div class="abstract-content">
-                这篇文章主要是总结一下我对离屏渲染的理解，之前一直不太理解离屏渲染到底是个什么，也不太理解为什么他会引起滚动界面卡顿，一直也没有去深入了解，自己也深感惭愧。以前看到了@ibireme写的iOS 保持界面流畅的技巧这篇文章，里面也描述了下屏幕显示原理。现在再次深入阅读，才比较理解离屏渲染到底是怎么回事。
-屏幕显示原理
-引用一下@ibireme的原文
-
-首先从过去的 CRT 显示器原理说起。CRT 的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或者其他硬件）会用硬件时钟...
+                最近在调试 NSTimer，发现了一些有趣的东西，在此文分析研究一下。
+问题
+当我有一个 viewController，持有了一个 timer, 当是不需要使用 timer 的时候，我能不能只调用 self.timer = nil;？
+什么是 NSTimer？
+根据 Apple 的开源代码 CFRunLoop.c 的定义，NSTimer 对应着一个 __CFRunLoopTimer 的结构体，具体代码如下：
+__CFRunLoopTimer
+1234567891011121314struct __CFRunLoopTimer &#123;    CFRuntimeBase _base; ...
             </div>
             <div class="abstract-post-meta">
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/03/20</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/09/13</span>
                 </div>
                 <!-- tags  -->
                 
                 <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS 优化">iOS 优化</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
     
 </div>
                 
