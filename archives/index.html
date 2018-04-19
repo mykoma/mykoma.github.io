@@ -342,6 +342,39 @@ Mac和Linux都默认有Python环境，直接使用Python的包管理器pip安装
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2017/10/03/2017-10-03/" >
+                
+                    <span>这些__attribute__的知识你应该知道</span>
+            </a>
+            <div class="abstract-content">
+                最近查看在网上发现了个有趣的小玩意__attribute__, 也就是 Clang Attributes，这是一个编译器提供的功能，能够让我向编译器指定一些特殊的功能，比如
+
+attribute((deprecated))：描述一个方法已经废弃；
+attribute((objc_requires_super))：描述子类继承父类的方法时需要调用 super方法；
+attribute((cleanup(...))): 描述一个变量在作用域结束时能够执行指定方法；
+......
+
+Clang 编译器提供了很多的 __attribute__ 功能，下面会介绍一些 Objective-C 中常用...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/03</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2017/09/13/2017-09-13/" >
                 
                     <span>NSTimer 不用的时候为什么需要调用invalidate？</span>
@@ -588,45 +621,11 @@ xib和storyboard...
             </div>
         </article>
     
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2010/09/29/2010-09-29/" >
-                
-                    <span>C++前向声明隐含的问题</span>
-            </a>
-            <div class="abstract-content">
-                前言
-导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子
-正文
-今天写代码的时候，遇到了一个很神奇的问题，在代码编译的时候很正常，编译成功。
-但是运行的时候，问题就出来了。
-B *b;
-我在代码中A *a = b-&gt;constructA();（constructA()在内部调用new，创建一个新的A的实例）
-即由类B的对象b生成一个类A的对象a，这里没有问题，
-我在这里什么都不做，直接调用delete a；
-神奇的时刻到来了，程序直接崩溃。
-经过几个小时的分析是因为include和前向声明的问题。
-1234A.h:class A&#123;...&#125;
-1234567...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2010/09/29</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "C++和汇编">C++和汇编</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">NEXT &#62;</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -819,42 +818,7 @@ B *b;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 10 </div>
+    <div class="total-archive"> Total : 11 </div>
     
     <div class="post-archive">
     
@@ -877,6 +841,11 @@ B *b;
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/03</span><a class="archive-post-title" href= "/2017/10/03/2017-10-03/" >这些__attribute__的知识你应该知道</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -928,12 +897,12 @@ B *b;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-16/" >C++ 字符串拷贝 汇编代码实现</a>
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-15/" >C++ 字符串比较 汇编代码实现</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-15/" >C++ 字符串比较 汇编代码实现</a>
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-16/" >C++ 字符串拷贝 汇编代码实现</a>
         </li>
     
     
@@ -961,9 +930,9 @@ B *b;
     
         <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
     
-        <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
-    
         <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
+    
+        <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
     
         <span class="sidebar-tag-name" data-tags="VPN"><span class="iconfont-archer">&#xe606;</span>VPN</span>
     
