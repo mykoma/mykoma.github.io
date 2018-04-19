@@ -355,7 +355,7 @@ height:50vh;
     <article class="article-entry">
         <p>最近在调试 NSTimer，发现了一些有趣的东西，在此文分析研究一下。</p>
 <h3>问题</h3>
-<p>当我有一个 viewController，持有了一个 timer, 当是不需要使用 timer 的时候，我能不能只调用 <code>self.timer = nil;</code>？</p>
+<p>一个 viewController，持有了一个 timer, 当不需要这个 timer 的时候，能不能只调用 <code>self.timer = nil;</code>？</p>
 <h3>什么是 NSTimer？</h3>
 <p>根据 Apple 的开源代码 <a href="https://opensource.apple.com/source/CF/CF-1153.18/CFRunLoop.c" target="_blank" rel="noopener">CFRunLoop.c</a> 的定义，NSTimer 对应着一个 __CFRunLoopTimer 的结构体，具体代码如下：</p>
 <h4>__CFRunLoopTimer</h4>
@@ -665,6 +665,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-archive"> Total : 10 </div>
     
     <div class="post-archive">
@@ -768,9 +770,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="C++和汇编"><span class="iconfont-archer">&#xe606;</span>C++和汇编</span>
     
-        <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
-    
         <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
+    
+        <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
     
         <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
     

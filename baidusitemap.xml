@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://wwhy.tech/2017/09/13/2017-09-13/</loc>
-    <lastmod>2018-04-18T16:01:13.940Z</lastmod>
+    <lastmod>2018-04-19T03:05:42.763Z</lastmod>
     <data>
         <display>
         <title>NSTimer 不用的时候为什么需要调用invalidate？</title>
@@ -89,6 +89,23 @@
 
     
   <url>
+    <loc>http://wwhy.tech/2016/06/08/2016-06-08/</loc>
+    <lastmod>2018-02-28T12:20:28.314Z</lastmod>
+    <data>
+        <display>
+        <title>也来写一写我理解中的代码布局、xib布局以及storyboard布局</title>
+        <pubTime>2016-06-07T16:02:10.000Z</pubTime>
+        
+        <tag>UI布局</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://wwhy.tech/2016/07/07/2016-07-07/</loc>
     <lastmod>2018-02-28T12:20:28.314Z</lastmod>
     <data>
@@ -114,23 +131,6 @@
         <pubTime>2016-08-21T04:30:11.000Z</pubTime>
         
         <tag>Swift</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://wwhy.tech/2016/06/08/2016-06-08/</loc>
-    <lastmod>2018-02-28T12:20:28.314Z</lastmod>
-    <data>
-        <display>
-        <title>也来写一写我理解中的代码布局、xib布局以及storyboard布局</title>
-        <pubTime>2016-06-07T16:02:10.000Z</pubTime>
-        
-        <tag>UI布局</tag>
          
          
            
