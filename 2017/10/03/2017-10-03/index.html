@@ -353,7 +353,8 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>最近查看在网上发现了个有趣的小玩意<code>__attribute__</code>, 也就是 Clang Attributes，这是一个编译器提供的功能，能够让我向编译器指定一些特殊的功能，比如</p>
+        <h3>序</h3>
+<p>最近查看在网上发现了个有趣的小玩意<code>__attribute__</code>, 也就是 Clang Attributes，这是一个编译器提供的功能，能够让我向编译器指定一些特殊的功能，比如</p>
 <ul>
 <li><strong>attribute</strong>((deprecated))：描述一个方法已经废弃；</li>
 <li><strong>attribute</strong>((objc_requires_super))：描述子类继承父类的方法时需要调用 super方法；</li>
@@ -382,7 +383,36 @@ height:50vh;
 </ul>
 <p><img src="/2017/10/03/2017-10-03/2.jpg" alt="Picture description"></p>
 <h3>__attribute__((objc_subclassing_restricted))</h3>
-<p>描述一个<strong>类</strong>是一个不能被继承的类，</p>
+<p>描述一个<strong>类</strong>是一个不能被继承的类。</p>
+<p>如果定义一个 Father 类，并且使用<code>__attribute__((objc_subclassing_restricted))</code>描述，那么如果一个 Son 类要去继承于 Father，编辑器会在编译器的预编译系统的帮助下，在 IDE 里面就把错误显示出来。</p>
+<p><img src="/2017/10/03/2017-10-03/3.jpg" alt="Picture description"></p>
+<h3>__attribute__((objc_requires_super))</h3>
+<p>描述一个<strong>子类</strong>继承父类的方法时，需要调用 super，否则给出编译警告。</p>
+<p>如果定义一个 Father 类，里面包含一个 call 方法，并且使用<code>__attribute__((objc_requires_super))</code>描述，那么如果一个 Son 在调用 call 的时候，需要显式的调用[super call]，如果没有调用，那么编辑器会在编译器的预编译系统的帮助下，在 IDE 里面就把警告显示出来。</p>
+<p><img src="/2017/10/03/2017-10-03/4.jpg" alt="Picture description"></p>
+<h3>__attribute__((warn_unused_result))</h3>
+<p>描述一个<strong>方法</strong>，如果此方法有返回值，但是调用的地方<strong>并未使用返回值</strong>，编译器就会提示一个警告。（编辑器在编译器的预编译系统的帮助下，也会在 IDE 中显示警告）</p>
+<p>如下面 Hippo 类的 bite 方法，使用了 <code>__attribute__((warn_unused_result))</code> 进行描述，在 bite 方法调用的时候没有使用返回值，编译器就就提示了一个警告</p>
+<p><img src="/2017/10/03/2017-10-03/5.jpg" alt="Picture description"></p>
+<h3>__attribute__((cleanup(...)))</h3>
+<p>修饰一个<strong>变量</strong>，在它的作用域结束时可以执行一个指定的方法。</p>
+<h4>基本类型变量</h4>
+<p>如果一个<strong>临时基本类型变量</strong>，在其超出作用域之后，这个变量会直接调用 cleanup。</p>
+<p><img src="/2017/10/03/2017-10-03/8.jpg" alt="Picture description"></p>
+<h4>对象变量</h4>
+<p>如果一个<strong>临时变量对象</strong>，在超出其作用域之后，其临时变量（变量本身）会被释放，但是其指向的对象则会根据他的生命周期来决定是否释放。也就是说：</p>
+<blockquote>
+<ul>
+<li>如果临时变量对象，没有被其他对象持有，那么最后其会先调用 cleanup，然后再调用 dealloc 方法</li>
+<li>如果临时变量对象，被其他对象持有了，那么其只会调用 cleanup，而 dealloc 是不会被调用的。（这是因为临时变量（变量本身）会被释放，但是其指向的对象则会根据他的生命周期来决定是否释放）</li>
+</ul>
+</blockquote>
+<p>下面两个例子可以很好的阐述上面两个观点：</p>
+<p><img src="/2017/10/03/2017-10-03/6.jpg" alt="Picture description"></p>
+<p>而下面的 hippo 对象被当前类给持有了，所以 dealloc 是不会调用的，只会调用 cleanup。</p>
+<p><img src="/2017/10/03/2017-10-03/7.jpg" alt="Picture description"></p>
+<h3>总结</h3>
+<p>__attribute__ 提供了很多的编译时功能，恰当的运用这些功能，可以使我们的代码更加灵活。</p>
 
     </article>
     <!-- 前后页  -->
@@ -518,7 +548,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">__attribute__((deprecated))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">__attribute__((objc_boxable))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">__attribute__((objc_subclassing_restricted))</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">__attribute__((deprecated))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">__attribute__((objc_boxable))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">__attribute__((objc_subclassing_restricted))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">__attribute__((objc_requires_super))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">__attribute__((warn_unused_result))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">__attribute__((cleanup(...)))</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">7.1.</span> <span class="toc-text">基本类型变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">7.2.</span> <span class="toc-text">对象变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -531,6 +561,12 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
     
     
     
@@ -746,9 +782,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
     
-        <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
-    
         <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
+    
+        <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
     
         <span class="sidebar-tag-name" data-tags="VPN"><span class="iconfont-archer">&#xe606;</span>VPN</span>
     
