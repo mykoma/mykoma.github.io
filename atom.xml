@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wwhy.tech/"/>
-  <updated>2018-04-22T15:12:24.290Z</updated>
+  <updated>2018-04-22T15:14:58.318Z</updated>
   <id>http://wwhy.tech/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>软件开发原则在 iOS 中的运用</title>
+    <title>开发六大原则在 iOS 中的运用</title>
     <link href="http://wwhy.tech/2018/03/21/2018-03-21/"/>
     <id>http://wwhy.tech/2018/03/21/2018-03-21/</id>
     <published>2018-03-21T12:31:01.000Z</published>
-    <updated>2018-04-22T15:12:24.290Z</updated>
+    <updated>2018-04-22T15:14:58.318Z</updated>
     
     <content type="html"><![CDATA[<h3>单一职责原则</h3><blockquote><p>一个类只负责一项职责。</p></blockquote><h3>开放-封闭原则</h3><blockquote><p>对扩展开放，对修改关闭。</p></blockquote><h3>依赖倒置原则</h3><blockquote><p>高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</p></blockquote><h3>里氏替换原则</h3><blockquote><p>子类可以扩展父类的功能，但不能改变父类原有的功能。</p></blockquote><h3>迪米特原则</h3><blockquote><p>一个对象应该对其他对象保持最少的了解（松耦合）。</p></blockquote><h3>接口隔离原则</h3><blockquote><p>一个类对另一个类的依赖应该建立在最小的接口上。</p></blockquote>]]></content>
     
