@@ -315,6 +315,35 @@ height:50vh;
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2011/01/15/2011-01-16/" >
+                
+                    <span>C++ 字符串拷贝 汇编代码实现</span>
+            </a>
+            <div class="abstract-content">
+                前言
+导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子
+正文
+123456789101112131415161718void asmCpy(char* str1, char* str2)&#123;    _asm&#123;        mov eax, str1	//将str1的地址赋值给eax        mov ecx, str2	//将str2的地址赋值给ecxs1:        mov bl, [eax]	//去eax地址所指向的值，赋值给bl        cmp [eax], 0	//比较当前这个字符是不是NULL        je end1		//如果...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2011/01/15</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "C++和汇编">C++和汇编</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2010/09/29/2010-09-29/" >
                 
                     <span>C++前向声明隐含的问题</span>
@@ -600,7 +629,34 @@ B *b;
     
     
     
-    <div class="total-archive"> Total : 11 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 12 </div>
     
     <div class="post-archive">
     
@@ -609,6 +665,11 @@ B *b;
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2018/03/21/2018-03-21/" >软件开发原则在 iOS 中的运用</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -710,13 +771,15 @@ B *b;
     
         <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
     
+        <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
+    
         <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
     
         <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
     
-        <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
-    
         <span class="sidebar-tag-name" data-tags="VPN"><span class="iconfont-archer">&#xe606;</span>VPN</span>
+    
+        <span class="sidebar-tag-name" data-tags="软件开发"><span class="iconfont-archer">&#xe606;</span>软件开发</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

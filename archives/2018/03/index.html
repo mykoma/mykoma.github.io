@@ -300,64 +300,47 @@
     
     
         <article class="index-post">
-            <a class="abstract-title" href = "/2011/01/15/2011-01-16/" >
+            <a class="abstract-title" href = "/2018/03/21/2018-03-21/" >
                 
-                    <span>C++ 字符串拷贝 汇编代码实现</span>
+                    <span>软件开发原则在 iOS 中的运用</span>
             </a>
             <div class="abstract-content">
-                前言
-导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子
-正文
-123456789101112131415161718void asmCpy(char* str1, char* str2)&#123;    _asm&#123;        mov eax, str1	//将str1的地址赋值给eax        mov ecx, str2	//将str2的地址赋值给ecxs1:        mov bl, [eax]	//去eax地址所指向的值，赋值给bl        cmp [eax], 0	//比较当前这个字符是不是NULL        je end1		//如果...
+                单一职责原则
+
+一个类只负责一项职责。
+
+开放-封闭原则
+
+对扩展开放，对修改关闭。
+
+依赖倒置原则
+
+高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。
+
+里氏替换原则
+
+子类可以扩展父类的功能，但不能改变父类原有的功能。
+
+迪米特原则
+
+一个对象应该对其他对象保持最少的了解（松耦合）。
+
+接口隔离原则
+
+一个类对另一个类的依赖应该建立在最小的接口上。
+
+
             </div>
             <div class="abstract-post-meta">
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2011/01/15</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/21</span>
                 </div>
                 <!-- tags  -->
                 
                 <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "C++和汇编">C++和汇编</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2010/09/29/2010-09-29/" >
-                
-                    <span>C++前向声明隐含的问题</span>
-            </a>
-            <div class="abstract-content">
-                前言
-导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子
-正文
-今天写代码的时候，遇到了一个很神奇的问题，在代码编译的时候很正常，编译成功。
-但是运行的时候，问题就出来了。
-B *b;
-我在代码中A *a = b-&gt;constructA();（constructA()在内部调用new，创建一个新的A的实例）
-即由类B的对象b生成一个类A的对象a，这里没有问题，
-我在这里什么都不做，直接调用delete a；
-神奇的时刻到来了，程序直接崩溃。
-经过几个小时的分析是因为include和前向声明的问题。
-1234A.h:class A&#123;...&#125;
-1234567...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2010/09/29</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "C++和汇编">C++和汇编</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "软件开发">软件开发</a>
     
 </div>
                 
@@ -365,10 +348,6 @@ B *b;
         </article>
     
     <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
     
 </main>
             <!-- profile -->
