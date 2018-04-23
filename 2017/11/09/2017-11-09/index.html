@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>iOS 11 中 UIBarButtonItem 的变化 · 成都老刘的技术小窝</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.7);
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        
+    <link rel="icon" href= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522950354149&di=2abb057a40aedc4f304a1aa11796b590&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Ffj%2Fpics%2Fhv1%2F162%2F192%2F1501%2F97651647.jpg>
+    <script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
+
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
+
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
+
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >成都老刘的技术小窝</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">iOS 11 中 UIBarButtonItem 的变化</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>成都老刘的技术小窝</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1822516668,2307386487&fm=27&gp=0.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            iOS 11 中 UIBarButtonItem 的变化
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/11/09</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
+    </div>
+</div>
+        <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3>序</h3>
+<p>随着 iOS 11 和 Xcode 9 的发布，导航栏<code>UINavigationBar</code> 里面的控件 <code>UIBarButtonItem</code> 有一些变化，下面我们一起看看有哪些变化。</p>
+<h3>变化</h3>
+<ul>
+<li><code>UIBarButtonItems</code> 的custom view的点击区域更小了</li>
+<li>返回按钮的点击区域也更小了</li>
+<li>如果上一个屏幕的 title 有变化，则返回按钮的 label 不再自动更新（iOS 10 前会自动更新）</li>
+<li><code>UIBarButtonSystemItemFixedSpace</code> 类型的 <code>UIBarButtonItem</code> 现在至少有 8 个点的最小宽度，负数的 width 不再生效</li>
+<li>重写 <code>alignmentRectInsets</code> 可能会导致 custom views 超出点击区域</li>
+</ul>
+<p>下面会详细的讲解上面几点变化。</p>
+<h3>点击区域(Tap Areas)</h3>
+<p>我们假设有一个 <strong>iOS 10</strong> 程序，其中包含两个有 custom view 的 <code>UIBarButtonItem</code>。然后我们使用 <code>Debug View Hierarchy</code> 去检查 custom 的真实大小。</p>
+<p><img src="/2017/11/09/2017-11-09/1.png" alt="Picture description"></p>
+<p>他们的点击区域实际上会更大，和下面的红色方块区域大小一致。</p>
+<p><img src="/2017/11/09/2017-11-09/2.png" alt="Picture description"></p>
+<p>然而在 <strong>iOS 11</strong> 上，显示的效果和上面的效果就不同了。点击区域大小和 custom view 的大小一致。</p>
+<p><img src="/2017/11/09/2017-11-09/3.png" alt="Picture description"></p>
+<p>在 <strong>iOS 11</strong> 上，这种点击区域的大小的确会使得用户很难点击。为了扩大点击区域，custom view 的需要扩大边距。我们可以创建一个拥有最小的size 约束的 Wrapper view。</p>
+<p><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WrapperView</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> minimumSize: <span class="type">CGSize</span> = <span class="type">CGSize</span>(width: <span class="number">44.0</span>, height: <span class="number">44.0</span>)</span><br><span class="line">    <span class="keyword">let</span> underlyingView: <span class="type">UIView</span></span><br><span class="line">    <span class="keyword">init</span>(underlyingView: <span class="type">UIView</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.underlyingView = underlyingView</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(frame: underlyingView.bounds)</span><br><span class="line"></span><br><span class="line">        underlyingView.translatesAutoresizingMaskIntoConstraints = <span class="literal">false</span></span><br><span class="line">        addSubview(underlyingView)</span><br><span class="line"></span><br><span class="line">        <span class="type">NSLayoutConstraint</span>.activate([</span><br><span class="line">            underlyingView.leadingAnchor.constraint(equalTo: leadingAnchor),</span><br><span class="line">            underlyingView.trailingAnchor.constraint(equalTo: trailingAnchor),</span><br><span class="line">            underlyingView.topAnchor.constraint(equalTo: topAnchor),</span><br><span class="line">            underlyingView.bottomAnchor.constraint(equalTo: bottomAnchor),</span><br><span class="line">            heightAnchor.constraint(greaterThanOrEqualToConstant: minimumSize.height),</span><br><span class="line">            widthAnchor.constraint(greaterThanOrEqualToConstant: minimumSize.width)</span><br><span class="line">        ])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2017/11/09/2017-11-09/4.png" alt="Picture description"></p>
+<h3>返回按钮(Back Button)</h3>
+<h4>点击区域(Tap Area)</h4>
+<p>当 view controller 的 title 很长的时候，iOS 11 上的返回按钮点击区域会变得更小。</p>
+<p>在 iOS 10 上的返回按钮有一个比较大的最小宽度，利于用户点击。</p>
+<p><img src="/2017/11/09/2017-11-09/5.png" alt="Picture description"></p>
+<p>然而在 iOS 11 上，返回按钮的点击区域变得很小。更糟糕的是 view controller 的 title，有时看起来像是返回按钮的 label。</p>
+<p><img src="/2017/11/09/2017-11-09/6.png" alt="Picture description"></p>
+<h4>动态更新(Label)</h4>
+<p>iOS 11 上面另外一个更新是返回按钮的 label。</p>
+<p>举个例子，假设有一个能够自动更新 title 的 <code>First(4)</code> 页面 (UIViewController),</p>
+<p><img src="/2017/11/09/2017-11-09/7.png" alt="Picture description"></p>
+<p>界面从 <code>First(4)</code> 页面 push 到 <code>Second</code> 页面，</p>
+<p><img src="/2017/11/09/2017-11-09/8.png" alt="Picture description"></p>
+<p>在 iOS 10 上，当 <code>First(4)</code>的 title 从 First(4) 变化到 First(6) 之后，返回按钮也变成了 First(6)，</p>
+<p><img src="/2017/11/09/2017-11-09/9.png" alt="Picture description"></p>
+<p>而在 iOS 11 上，返回按钮的 label 并没有自动更新，而是保持不变。</p>
+<p><img src="/2017/11/09/2017-11-09/10.png" alt="Picture description"></p>
+<h3>自动布局(Auto Layout)</h3>
+<p><code>UINavigationBar</code> 现在能够使用自动布局（Auto Layout）来布局它的 subviews（包括 custom views）。在今年的 WWDC上中的 <a href="https://developer.apple.com/videos/play/wwdc2017/204/" target="_blank" rel="noopener">Updating Your Apps for iOS 11</a> 里面有提到。</p>
+<p>在 iOS 11 中，我们能够从 <code>Debug View Hierarchy</code> 检查 <code>UINavigationBar</code> 看到，<code>UINavigationBar</code> 内部的 buttons 都被放置在一个 stack view 中。</p>
+<p><img src="/2017/11/09/2017-11-09/11.png" alt="Picture description"></p>
+<p>当我们正确的实现了 custom view 的 <code>sizeThatFits</code> 和 <code>intrinsicContentSize</code>，<code>UINavigationBar</code>也会如以前那样工作正常。</p>
+<p>但是，需要注意的是，当我们把custom view 的 <code>translatesAutoresizingMaskIntoConstraints</code> 设成 <code>false</code>，在 iOS 10（如果你的 App 还支持 iOS 10的话）上，可能出现一些莫名其妙的问题。比如可能导致custom view 的 top-left 方向布局错位。这种情况下，一个简单的保护代码如下：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let customView = createCustomView()</span><br><span class="line">if #available(iOS 11, *) &#123;</span><br><span class="line">    customView.translatesAutoresizingMaskIntoConstraints = false</span><br><span class="line">&#125;</span><br><span class="line">navigationItem.rightBarButtonItem = UIBarButtonIte(customView: customView)</span><br></pre></td></tr></table></figure></p>
+<h3>自定义对齐(Custom Alignment)</h3>
+<p>很多时候，我们想能够自由的控制 custom <code>UIBarButtonItem</code> 的布局（对齐），特别是和屏幕两边的边距大小。在 iOS 10（及以前）来说，我们经常用到两种小技巧：</p>
+<ul>
+<li>使用fixed space item，即<code>UIBarButtonItem(barButtonSystemItem: .fixedSpace …)</code>，并且赋值一个负数，比如-15</li>
+<li>重写 custom view 的 <code>alignmentRectInsets</code></li>
+</ul>
+<p>但是在 iOS 11 上，上面两个方法都有点变化，第一个办法已经失效，而第二个办法也有点问题。</p>
+<h4>Fixed Space Items</h4>
+<p>当我们使用 custom view 的时候， 默认的边距是16个点，</p>
+<p><img src="/2017/11/09/2017-11-09/12.png" alt="Picture description"></p>
+<p>假设我们想将边距减少到 8 个点，那么在 iOS 10 上面，我们需要设置fixed space <code>UIBarButtonItem</code> 的宽度为 -8 就可以达到我们想要的效果。</p>
+<p><img src="/2017/11/09/2017-11-09/13.png" alt="Picture description"></p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)</span><br><span class="line">spacer.width = -8</span><br><span class="line">let barButtonsItems = [</span><br><span class="line">    spacer,</span><br><span class="line">    UIBarButtonItem(customView: createCustomButton()),</span><br><span class="line">    UIBarButtonItem(customView: createCustomButton())</span><br><span class="line">]</span><br><span class="line">navigationItem.rightBarButtonItems = barButtonItems</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2017/11/09/2017-11-09/14.png" alt="Picture description"></p>
+<p>然而在 iOS 11 上，修改fixed space <code>UIBarButtonItem</code> 的宽度为 -8 会不生效。</p>
+<h4>Alignment Rect Insets</h4>
+<p>而重写 custom view 的 <code>alignmentRectInsets</code>，在 iOS 10 上面也能够修改布局边距</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class CustomView: UIView &#123;</span><br><span class="line">    var alignmentRectInsetsOverride: UIEdgeInsets?</span><br><span class="line">    override var alignmentRectInsets: UIEdgeInsets &#123;</span><br><span class="line">        return alignmentRectInsetsOverride ?? super.alignmentRectInsets</span><br><span class="line">    &#125;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>设置 <code>alignmentRectInsets</code> 的值为 UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)，也能够和前面的修改起到相同的作用</p>
+<p><img src="/2017/11/09/2017-11-09/15.png" alt="Picture description"></p>
+<p>上面的代码在 iOS 11 上面依然能够起到作用，但是有一个小的问题是，item 里面有一小部分超出了 stack view 的范围。超出的区域不能点击，也就意味着点击区域变小了。</p>
+<p><img src="/2017/11/09/2017-11-09/16.png" alt="Picture description"></p>
+<h4>Workaround</h4>
+<p>根据前面<a href="#fixed-space-items">fixed space的例子</a>，我们发现相对于未使用 custom view 的情况，边距有所变小。</p>
+<p><img src="/2017/11/09/2017-11-09/17.png" alt="Picture description"></p>
+<p>当我们未使用 custom view 的时候，边距到屏幕边缘是 8 个点</p>
+<p><img src="/2017/11/09/2017-11-09/18.png" alt="Picture description"></p>
+<p>当我们使用了 custom view 的时候，边距到屏幕是 16 个点</p>
+<p><img src="/2017/11/09/2017-11-09/19.png" alt="Picture description"></p>
+<p>根据上面的发现，我们的目标是：让 custom view 的边距在 iOS 11 上面依然是 8 个点。添加一个 <code>fix space item</code> 将会使得内部的 stack view 减少边距，那么修改 <code>alignmentRectInsets</code> 的值去移动 <code>custom view</code> 的 frame，可以使内部的 stack view 对齐。</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func alignedBarButtonItems() -&gt; [UIBarButtonItem] &#123;</span><br><span class="line">    let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)</span><br><span class="line">    spacer.width = 8</span><br><span class="line">    let barButtonsItems = [</span><br><span class="line">        spacer,</span><br><span class="line">        UIBarButtonItem(customView: createCustomButton(offset: spacer.width)),</span><br><span class="line">        UIBarButtonItem(customView: createCustomButton(offset: spacer.width)),</span><br><span class="line">        ]</span><br><span class="line">    return barButtonsItems</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func createCustomButton(offset: CGFloat = 0) -&gt; UIButton &#123;</span><br><span class="line">    let button = CustomButton(frame: CGRect(x:0, y: 0, width: 24, height: 24))</span><br><span class="line">    button.alignmentRectInsetsOverride = UIEdgeInsets(top: 0, left: -offset, bottom: 0, right: offset)</span><br><span class="line">    button.translatesAutoresizingMaskIntoConstraints = false</span><br><span class="line">    return button</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2017/11/09/2017-11-09/20.png" alt="Picture description"></p>
+<p>目前来说，这个 workaround 只能将边距设置为 8，如果我们将这个值设为一个更小的值，那么custom view 依然会超出 stack view。</p>
+<h3>参考</h3>
+<ul>
+<li><a href="http://www.matrixprojects.net/p/uibarbuttonitem-ios11/" target="_blank" rel="noopener">UIBarButtonItem &amp; iOS 11</a></li>
+</ul>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/01/01/2018-01-01/" title= Shadowsocks 科学上网利器 >
+                    <div class="nextTitle">Shadowsocks 科学上网利器</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2017/10/03/2017-10-03/" title= 这些__attribute__的知识你应该知道 >
+                    <div class="prevTitle">这些__attribute__的知识你应该知道</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC8zNTQ5My8xMjAyOQ==>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:23775517@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/mykoma" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">变化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">点击区域(Tap Areas)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">返回按钮(Back Button)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">点击区域(Tap Area)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">4.2.</span> <span class="toc-text">动态更新(Label)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">自动布局(Auto Layout)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">自定义对齐(Custom Alignment)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">6.1.</span> <span class="toc-text">Fixed Space Items</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">6.2.</span> <span class="toc-text">Alignment Rect Insets</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">6.3.</span> <span class="toc-text">Workaround</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 13 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2018/03/21/2018-03-21/" >开发六大原则在 iOS 中的运用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/01</span><a class="archive-post-title" href= "/2018/01/01/2018-01-01/" >Shadowsocks 科学上网利器</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/09</span><a class="archive-post-title" href= "/2017/11/09/2017-11-09/" >iOS 11 中 UIBarButtonItem 的变化</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/03</span><a class="archive-post-title" href= "/2017/10/03/2017-10-03/" >这些__attribute__的知识你应该知道</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/13</span><a class="archive-post-title" href= "/2017/09/13/2017-09-13/" >NSTimer 不用的时候为什么需要调用invalidate？</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href= "/2017/04/02/2017-04-02/" >再总结一下NSString 与 NSMutableString 的 property 约束</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2017/03/20/2017-03-20/" >优化之离屏渲染</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/21</span><a class="archive-post-title" href= "/2016/08/21/2016-08-21/" >Swift中的闭包定义</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/07</span><a class="archive-post-title" href= "/2016/07/07/2016-07-07/" >Swift中的init</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2016/06/08/2016-06-08/" >也来写一写我理解中的代码布局、xib布局以及storyboard布局</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2011 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-16/" >C++ 字符串拷贝 汇编代码实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-15/" >C++ 字符串比较 汇编代码实现</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2010 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2010/09/29/2010-09-29/" >C++前向声明隐含的问题</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="C++和汇编"><span class="iconfont-archer">&#xe606;</span>C++和汇编</span>
+    
+        <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
+    
+        <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
+    
+        <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
+    
+        <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPN"><span class="iconfont-archer">&#xe606;</span>VPN</span>
+    
+        <span class="sidebar-tag-name" data-tags="软件开发"><span class="iconfont-archer">&#xe606;</span>软件开发</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'Gang Liu'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
+</html>
+
+
