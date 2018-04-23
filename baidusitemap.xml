@@ -141,6 +141,23 @@
 
     
   <url>
+    <loc>http://wwhy.tech/2016/07/07/2016-07-07/</loc>
+    <lastmod>2018-02-28T12:20:28.314Z</lastmod>
+    <data>
+        <display>
+        <title>Swift中的init</title>
+        <pubTime>2016-07-07T08:02:10.000Z</pubTime>
+        
+        <tag>Swift</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://wwhy.tech/2016/08/21/2016-08-21/</loc>
     <lastmod>2018-02-28T12:20:28.314Z</lastmod>
     <data>
@@ -166,23 +183,6 @@
         <pubTime>2016-06-07T16:02:10.000Z</pubTime>
         
         <tag>UI布局</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://wwhy.tech/2016/07/07/2016-07-07/</loc>
-    <lastmod>2018-02-28T12:20:28.314Z</lastmod>
-    <data>
-        <display>
-        <title>Swift中的init</title>
-        <pubTime>2016-07-07T08:02:10.000Z</pubTime>
-        
-        <tag>Swift</tag>
          
          
            
