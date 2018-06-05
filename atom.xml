@@ -273,32 +273,6 @@
   </entry>
   
   <entry>
-    <title>细说 iOS 中的 http 协议</title>
-    <link href="http://wwhy.tech/2016/02/02/2016-02-02/"/>
-    <id>http://wwhy.tech/2016/02/02/2016-02-02/</id>
-    <published>2016-02-02T08:21:09.000Z</published>
-    <updated>2018-05-02T02:07:32.629Z</updated>
-    
-    <content type="html"><![CDATA[<h3>前言</h3><p>http 协议在我们的工作中，基本上99%的 app 都是无法避免的，http 协议的重要性，不亚于 UIKit 的存在。</p><p>当我们在工作中，对 http 协议的理解层度，很多时候决定了我们项目架构的深度和稳定性；当我们在<strong>找工作</strong>中，对 http 协议的理解层度，很多时候也决定了我们应聘的职位 level。</p><p>在这篇文章中，我会详细的、系统的讲解下 http 协议，以及 http 协议在 iOS 中相关的一些知识。</p><blockquote><ul><li>http 协议细说</li><li>http 协议在 iOS 中如何存在的</li></ul></blockquote><h3>http 协议</h3><p>关于 http 协议，</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3&gt;前言&lt;/h3&gt;
-&lt;p&gt;http 协议在我们的工作中，基本上99%的 app 都是无法避免的，http 协议的重要性，不亚于 UIKit 的存在。&lt;/p&gt;
-&lt;p&gt;当我们在工作中，对 http 协议的理解层度，很多时候决定了我们项目架构的深度和稳定性；
-当我们在&lt;strong
-      
-    
-    </summary>
-    
-    
-      <category term="Http" scheme="http://wwhy.tech/tags/Http/"/>
-    
-  </entry>
-  
-  <entry>
     <title>C++ 字符串比较 汇编代码实现</title>
     <link href="http://wwhy.tech/2011/01/15/2011-01-15/"/>
     <id>http://wwhy.tech/2011/01/15/2011-01-15/</id>
