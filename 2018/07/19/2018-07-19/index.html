@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>成都老刘的技术小窝</title>
+    <title>React Native 中Component和PureComponent总结 · 成都老刘的技术小窝</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522950354149&di=2abb057a40aedc4f304a1aa11796b590&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Ffj%2Fpics%2Fhv1%2F162%2F192%2F1501%2F97651647.jpg>
     <script>
@@ -175,12 +177,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >成都老刘的技术小窝</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">React Native 中Component和PureComponent总结</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>成都老刘的技术小窝</a>
 </header>
@@ -194,24 +207,67 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1822516668,2307386487&fm=27&gp=0.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            React Native 中Component和PureComponent总结
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "React Native">React Native</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/07/19</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -295,66 +351,104 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3>序</h3>
+<p>在客户端上，iOS和React的页面概念是不一样的。在React中，Component是非常重要的概念，是组成界面的主要元素。而在iOS中，ViewController和View是组成一个界面的主要元素。在iOS中ViewContoller相当于是很多View的集合体，处理多个view。而React中的Component是一个更加集中的概念，无论是一个页面， 还是一个页面中的子元素，都是Component。</p>
+<h4>Component</h4>
+<h5>Component的生命周期</h5>
+<p>借用其他人的图，能够清楚的看出Component的相对于iOS的ViewController来说，还是要复杂一些。</p>
+<p><img src="/2018/07/19/2018-07-19/1.jpg" alt="Component的生命周期"></p>
+<h5>Component的render</h5>
+<p>对于Component来说，当一个组件render调用的时候， 它的子组件也会去调用render，如下图：</p>
+<p>component2是component1的子组件，component1是component0的子组件，当component0的state有变化，会触发component0的render，这个时候， 就算component1和component2的render都会被调用起来。</p>
+<p><img src="/2018/07/19/2018-07-19/2.png" alt="2.png"></p>
+<p>其实对于component1和component2来说，他们的render没有必要调用起来，（即使后面渲染的时候，他们不会被重新渲染，但是还是会做额度的比较）。</p>
+<h4>PureComponent</h4>
+<p>相对于Component来说，PureComponent是一个新能更高的版本。PureComponent的优势在于能够<strong>减少触发不必要的render</strong>。</p>
+<h5>PureComponent的生命周期</h5>
+<p>PureComponent的生命周期和Component的生命周期是一致的。</p>
+<h5>PureComponent的render</h5>
+<p>总体来说，PureComponent和Component的区别在于，PureComponent通过重写 <code>shouldComponentUpdate</code> 函数，减少了render的调用。</p>
+<p>当组件更新时，如果组件的 props 和 state 都没发生改变， render 方法就不会触发，省去 Virtual DOM 的生成和比对过程，达到提升性能的目的。具体就是 React 自动帮我们做了一层浅比较：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (this._compositeType === CompositeTypes.PureClass) &#123;</span><br><span class="line">  shouldUpdate = !shallowEqual(prevProps, nextProps)</span><br><span class="line">  || !shallowEqual(inst.state, nextState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而 shallowEqual 又做了什么呢？会比较 Object.keys(state | props) 的长度是否一致，每一个 key 是否两者都有，并且是否是一个引用，也就是只比较了第一层的值，确实很浅，所以深层的嵌套数据是对比不出来的。</p>
+<p>以上面的图举例：
+假设component0、component1和component2都是PureComponent，如果component0的state发生了改变，component0的render被触发了，然而component1和component2是不会触发render的。</p>
+<h4>总结</h4>
+<p>以上图示例，当component0的state或者props发生变化时，component1的state和props没有变化时，</p>
+<p>render函数的调用次数：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Component</th>
+<th>PureComponent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>component0</td>
+<td>多次调用</td>
+<td>多次调用</td>
+</tr>
+<tr>
+<td>component1</td>
+<td>多次调用</td>
+<td>不会调用</td>
+</tr>
+<tr>
+<td>component2</td>
+<td>多次调用</td>
+<td>不会调用</td>
+</tr>
+</tbody>
+</table>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/05/27/2018-05-17/" title= 多线程-生产者消费者 >
+                    <div class="prevTitle">多线程-生产者消费者</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+    <div id="lv-container" data-id="city" data-uid= MTAyMC8zNTQ5My8xMjAyOQ==>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+
     
     
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/21/2018-03-21/" >
-                
-                    <span>iOS中的面向对象：三大特征、五大原则</span>
-            </a>
-            <div class="abstract-content">
-                三大特征
-封装
-
-将对象的属性和细节隐藏起来，只提供公共的访问方式。
-
-继承
-
-继承是从已有的类派生出新的类，新的类能继承已有类的数据属性和行为，并扩展新的功能。
-
-多态
-
-同一个实现接口，使用不同的实例而执行不同的操作。
-
-五大原则
-单一职责原则
-
-一个类只负责一项职责。
-
-开放-封闭原则
-
-对扩展开放，对修改关闭。
-
-依赖倒置原则
-
-高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。
-
-里氏替换原则
-
-只要父类能出现的地方子类也可以出现，而且替换为子类不会产生任何错误或异常，但是反过来就不行，有子类出现的地方，父类未必就能适应。。
-
-接口隔离原则...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/21</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "软件开发，面向对象">软件开发，面向对象</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -424,6 +518,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">Component</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.1.</span> <span class="toc-text">Component的生命周期</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.2.</span> <span class="toc-text">Component的render</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">PureComponent</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.1.</span> <span class="toc-text">PureComponent的生命周期</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.2.</span> <span class="toc-text">PureComponent的render</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -813,6 +925,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
