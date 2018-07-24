@@ -251,9 +251,9 @@
     <link href="http://wwhy.tech/2016/11/22/2016-11-22/"/>
     <id>http://wwhy.tech/2016/11/22/2016-11-22/</id>
     <published>2016-11-22T03:54:10.000Z</published>
-    <updated>2018-07-24T11:54:27.870Z</updated>
+    <updated>2018-07-24T12:01:30.583Z</updated>
     
-    <content type="html"><![CDATA[<h3>序</h3><p>Specta + OCMock + Expecta + OHHTTPStubs + FBSnapshotTestCase + &quot;Expecta+Snapshots&quot;</p><p>Specta: BDD框架 参考链接https://github.com/specta/spectaExpecta: 断言框架 参考链接https://github.com/specta/expectaOCMock: mock框架 参考链接http://ocmock.orgFBSnapshotTestCase: 截图测试框架 https://github.com/facebookarchive/ios-snapshot-test-caseExpecta+Snapshots: FBSnapshotTestCase的扩展https://github.com/dblock/ios-snapshot-test-case-expecta</p>]]></content>
+    <content type="html"><![CDATA[<h3>序</h3><p>Specta + OCMock + Expecta + OHHTTPStubs + FBSnapshotTestCase + &quot;Expecta+Snapshots&quot;</p><p>Specta: BDD框架 <a href="https://github.com/specta/specta" target="_blank" rel="noopener">参考链接</a></p><p>Expecta: 断言框架 <a href="https://github.com/specta/expecta" target="_blank" rel="noopener">参考链接</a></p><p>OCMock: mock框架 <a href="http://ocmock.org" target="_blank" rel="noopener">参考链接</a></p><p>FBSnapshotTestCase: <a href="https://github.com/facebookarchive/ios-snapshot-test-case" target="_blank" rel="noopener">参考链接</a></p><p>Expecta+Snapshots: <a href="https://github.com/dblock/ios-snapshot-test-case-expecta" target="_blank" rel="noopener">参考链接</a></p>]]></content>
     
     <summary type="html">
     
@@ -261,7 +261,7 @@
       
         &lt;h3&gt;序&lt;/h3&gt;
 &lt;p&gt;Specta + OCMock + Expecta + OHHTTPStubs + FBSnapshotTestCase + &amp;quot;Expecta+Snapshots&amp;quot;&lt;/p&gt;
-&lt;p&gt;Specta: BDD框架 参考链接https://
+&lt;p&gt;Specta: BDD框架 &lt;a href=&quot;htt
       
     
     </summary>
