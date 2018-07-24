@@ -247,6 +247,31 @@
   </entry>
   
   <entry>
+    <title>iOS的单元测试</title>
+    <link href="http://wwhy.tech/2016/11/22/2016-11-22/"/>
+    <id>http://wwhy.tech/2016/11/22/2016-11-22/</id>
+    <published>2016-11-22T03:54:10.000Z</published>
+    <updated>2018-07-24T11:54:27.870Z</updated>
+    
+    <content type="html"><![CDATA[<h3>序</h3><p>Specta + OCMock + Expecta + OHHTTPStubs + FBSnapshotTestCase + &quot;Expecta+Snapshots&quot;</p><p>Specta: BDD框架 参考链接https://github.com/specta/spectaExpecta: 断言框架 参考链接https://github.com/specta/expectaOCMock: mock框架 参考链接http://ocmock.orgFBSnapshotTestCase: 截图测试框架 https://github.com/facebookarchive/ios-snapshot-test-caseExpecta+Snapshots: FBSnapshotTestCase的扩展https://github.com/dblock/ios-snapshot-test-case-expecta</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3&gt;序&lt;/h3&gt;
+&lt;p&gt;Specta + OCMock + Expecta + OHHTTPStubs + FBSnapshotTestCase + &amp;quot;Expecta+Snapshots&amp;quot;&lt;/p&gt;
+&lt;p&gt;Specta: BDD框架 参考链接https://
+      
+    
+    </summary>
+    
+    
+      <category term="Http" scheme="http://wwhy.tech/tags/Http/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Swift中的闭包定义</title>
     <link href="http://wwhy.tech/2016/08/21/2016-08-21/"/>
     <id>http://wwhy.tech/2016/08/21/2016-08-21/</id>
