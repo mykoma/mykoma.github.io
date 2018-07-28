@@ -300,6 +300,38 @@
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2018/07/28/2018-07-28/" >
+                
+                    <span>使用Specta单元测试检测对象是否泄漏</span>
+            </a>
+            <div class="abstract-content">
+                序
+Specta作为一个优秀的测试框架，不仅能够进行常规的单元测试，也能够测试对象是否存在泄漏。
+原理
+创建一个容器TestContainer，它weak持有将要检测的对象testObject，然后，我们让其他持有testObject的指针都置为nil，这样就只有这个容器TestContainer在weak持有testObject，我们知道没有强引用这个testObject的时候，testObject的对象会被释放掉， 而TestContainer里面weak引用的指针，也会被置为nil。
+而我们会延时几秒钟，检查TestContainer的指针是不是为nil。
+具体操作
+TestCon...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/28</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "测试">测试</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2018/07/19/2018-07-19/" >
                 
                     <span>React Native 中Component和PureComponent总结</span>
@@ -717,7 +749,30 @@ Mac和Linux都默认有Python环境，直接使用Python的包管理器pip安装
     
     
     
-    <div class="total-archive"> Total : 17 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 18 </div>
     
     <div class="post-archive">
     
@@ -726,6 +781,11 @@ Mac和Linux都默认有Python环境，直接使用Python的包管理器pip安装
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/28</span><a class="archive-post-title" href= "/2018/07/28/2018-07-28/" >使用Specta单元测试检测对象是否泄漏</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -857,11 +917,11 @@ Mac和Linux都默认有Python环境，直接使用Python的包管理器pip安装
     
         <span class="sidebar-tag-name" data-tags="Http"><span class="iconfont-archer">&#xe606;</span>Http</span>
     
-        <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
-    
         <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
     
         <span class="sidebar-tag-name" data-tags="单元测试"><span class="iconfont-archer">&#xe606;</span>单元测试</span>
+    
+        <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
     
         <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
     
@@ -872,6 +932,8 @@ Mac和Linux都默认有Python环境，直接使用Python的包管理器pip安装
         <span class="sidebar-tag-name" data-tags="软件开发，多线程"><span class="iconfont-archer">&#xe606;</span>软件开发，多线程</span>
     
         <span class="sidebar-tag-name" data-tags="React Native"><span class="iconfont-archer">&#xe606;</span>React Native</span>
+    
+        <span class="sidebar-tag-name" data-tags="测试"><span class="iconfont-archer">&#xe606;</span>测试</span>
     
         <span class="sidebar-tag-name" data-tags="iOS 优化"><span class="iconfont-archer">&#xe606;</span>iOS 优化</span>
     

@@ -300,29 +300,29 @@
     
     
         <article class="index-post">
-            <a class="abstract-title" href = "/2018/07/19/2018-07-19/" >
+            <a class="abstract-title" href = "/2018/07/28/2018-07-28/" >
                 
-                    <span>React Native 中Component和PureComponent总结</span>
+                    <span>使用Specta单元测试检测对象是否泄漏</span>
             </a>
             <div class="abstract-content">
                 序
-在客户端上，iOS和React的页面概念是不一样的。在React中，Component是非常重要的概念，是组成界面的主要元素。而在iOS中，ViewController和View是组成一个界面的主要元素。在iOS中ViewContoller相当于是很多View的集合体，处理多个view。而React中的Component是一个更加集中的概念，无论是一个页面， 还是一个页面中的子元素，都是Component。
-Component
-Component的生命周期
-借用其他人的图，能够清楚的看出Component的相对于iOS的ViewController来说，还是要复杂一些。
-
-Compo...
+Specta作为一个优秀的测试框架，不仅能够进行常规的单元测试，也能够测试对象是否存在泄漏。
+原理
+创建一个容器TestContainer，它weak持有将要检测的对象testObject，然后，我们让其他持有testObject的指针都置为nil，这样就只有这个容器TestContainer在weak持有testObject，我们知道没有强引用这个testObject的时候，testObject的对象会被释放掉， 而TestContainer里面weak引用的指针，也会被置为nil。
+而我们会延时几秒钟，检查TestContainer的指针是不是为nil。
+具体操作
+TestCon...
             </div>
             <div class="abstract-post-meta">
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/19</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/28</span>
                 </div>
                 <!-- tags  -->
                 
                 <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "React Native">React Native</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "测试">测试</a>
     
 </div>
                 
