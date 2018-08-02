@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>成都老刘的技术小窝</title>
+    <title>使用Specta单元测试检测View和ViewController是否泄漏 · 成都老刘的技术小窝</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522950354149&di=2abb057a40aedc4f304a1aa11796b590&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Ffj%2Fpics%2Fhv1%2F162%2F192%2F1501%2F97651647.jpg>
     <script>
@@ -175,14 +177,23 @@
 </head>
 
     
-        <body class="home-body">
+        <body class="post-body">
     
     
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >成都老刘的技术小窝</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">使用Specta单元测试检测View和ViewController是否泄漏</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>成都老刘的技术小窝</a>
 </header>
@@ -203,17 +214,17 @@ height:50vh;
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522950747876&di=47a5163cd82e874a214b25ec20b2a7ae&imgtype=0&src=http%3A%2F%2Fpic28.nipic.com%2F20130420%2F8952533_011531471000_2.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1822516668,2307386487&fm=27&gp=0.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            成都老刘的技术小窝
-            <!-- 文章页  -->
+            使用Specta单元测试检测View和ViewController是否泄漏
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -221,12 +232,42 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-                天行健，君子以自强不息，地势坤，君子以厚德载物
-            
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "测试">测试</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/08/02</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -310,426 +351,87 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/08/02/2018-08-02/" >
-                
-                    <span>使用Specta单元测试检测View和ViewController是否泄漏</span>
-            </a>
-            <div class="abstract-content">
-                序
-前面使用Specta单元测试检测对象是否泄漏介绍了如何检测一个普通的NSObject对象是否泄漏。UIView和UIViewController也是NSObject的子类，当然也能使用使用Specta单元测试检测对象是否泄漏，但是我们知道UIView和UIViewController的应用场景比起普通的NSObject对应要更加复杂一些。
-下面会介绍使用Specta单元测试检测View和ViewController是否泄漏。
-TestContainer 代码
-和之前的文章一样，也需要一个TestContainer来weak持有要检测的对象。
-1234567891011@interfa...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/02</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "测试">测试</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/07/28/2018-07-28/" >
-                
-                    <span>使用Specta单元测试检测对象是否泄漏</span>
-            </a>
-            <div class="abstract-content">
-                序
-Specta作为一个优秀的测试框架，不仅能够进行常规的单元测试，也能够测试对象是否存在泄漏。
-原理
-创建一个容器TestContainer，它weak持有将要检测的对象testObject，然后，我们让其他持有testObject的指针都置为nil，这样就只有这个容器TestContainer在weak持有testObject，我们知道没有强引用这个testObject的时候，testObject的对象会被释放掉， 而TestContainer里面weak引用的指针，也会被置为nil。
-而我们会延时几秒钟，检查TestContainer的指针是不是为nil。
-具体操作
-TestCon...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/28</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "测试">测试</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/07/19/2018-07-19/" >
-                
-                    <span>React Native 中Component和PureComponent总结</span>
-            </a>
-            <div class="abstract-content">
-                序
-在客户端上，iOS和React的页面概念是不一样的。在React中，Component是非常重要的概念，是组成界面的主要元素。而在iOS中，ViewController和View是组成一个界面的主要元素。在iOS中ViewContoller相当于是很多View的集合体，处理多个view。而React中的Component是一个更加集中的概念，无论是一个页面， 还是一个页面中的子元素，都是Component。
-Component
-Component的生命周期
-借用其他人的图，能够清楚的看出Component的相对于iOS的ViewController来说，还是要复杂一些。
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3>序</h3>
+<p>前面<a href="http://wwhy.tech/2018/07/28/2018-07-28/">使用Specta单元测试检测对象是否泄漏</a>介绍了如何检测一个普通的NSObject对象是否泄漏。UIView和UIViewController也是NSObject的子类，当然也能使用<a href="http://wwhy.tech/2018/07/28/2018-07-28/">使用Specta单元测试检测对象是否泄漏</a>，但是我们知道UIView和UIViewController的应用场景比起普通的NSObject对应要更加复杂一些。</p>
+<p>下面会介绍使用Specta单元测试检测View和ViewController是否泄漏。</p>
+<h4>TestContainer 代码</h4>
+<p>和之前的文章一样，也需要一个TestContainer来weak持有要检测的对象。</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@interface TestContainer : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, weak) id object;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@implementation TestContainer</span><br><span class="line">// Empty</span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<h4>UIView的检测</h4>
+<p>对于UIView的检测，我们可以创建一个UIWindow，并且把UIView添加到这个UIWindow里面，然后让这个UIWindow进行展示，最后再将这个UIWindow设置成nil，这样就能模拟这个UIView一个完整的生命周期。</p>
+<p>这样就能检测UIView是否存在泄漏。</p>
+<h5>UIView - Spec测试代码</h5>
+<p>下面写检测代码，我们定义一个局部变量weakView， 然后在一个@autoreleasepool里面创建对象， 并且这个weakView在block内部置为nil</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">describe(@&quot;TestObject&quot;, ^&#123;</span><br><span class="line">    context(@&quot;when created&quot;, ^&#123;</span><br><span class="line">        it(@&quot;should dealloc&quot;, ^&#123;</span><br><span class="line">            TestContainer *tc = [TestContainer new];</span><br><span class="line">            __weak TestView *weakView = nil;</span><br><span class="line">            @autoreleasepool &#123;</span><br><span class="line">                TestView *view = [[TestView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];</span><br><span class="line">                expect(view).beKindOf([UIView class]);</span><br><span class="line">                UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];</span><br><span class="line">                [window makeKeyAndVisible];</span><br><span class="line">                [window addSubview:view];</span><br><span class="line">                weakView = view;</span><br><span class="line">                expect(weakView).notTo.beNil();</span><br><span class="line">                tc.object = weakView;</span><br><span class="line">                view = nil;</span><br><span class="line">                window = nil;</span><br><span class="line">            &#125;</span><br><span class="line">            expect(tc.object).after(5).to.beNil();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这里我们断言：断定tc的object指针在5秒钟后，是nil。</p>
+<h5>UIView - 模板代码</h5>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sharedExamplesFor(@&quot;view_dealloc_behavior&quot;, ^(NSDictionary *data) &#123;</span><br><span class="line">    context(@&quot;removed&quot;, ^&#123;</span><br><span class="line">        it(@&quot;should dealloc&quot;, ^&#123;</span><br><span class="line">            id (^block)(void) = [[data allValues] firstObject];</span><br><span class="line">            if (!block) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            TestContainer *tc = [TestContainer new];</span><br><span class="line">            __weak UIView *weakView = nil;</span><br><span class="line">            @autoreleasepool &#123;</span><br><span class="line">                UIView *view = block();</span><br><span class="line">                expect(view).beKindOf([UIView class]);</span><br><span class="line">                UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];</span><br><span class="line">                [window makeKeyAndVisible];</span><br><span class="line">                [window addSubview:view];</span><br><span class="line">                weakView = view;</span><br><span class="line">                expect(weakView).notTo.beNil();</span><br><span class="line">                tc.object = weakView;</span><br><span class="line">                view = nil;</span><br><span class="line">                window = nil;</span><br><span class="line">            &#125;</span><br><span class="line">            expect(tc.object).after(5).to.beNil();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>使用上面的模板代码，</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(@&quot;TestView&quot;, ^&#123;</span><br><span class="line">    itShouldBehaveLike(@&quot;view_dealloc_behavior&quot;, @&#123; @&quot;value&quot; : ^&#123;</span><br><span class="line">        return [[TestView alloc] init];</span><br><span class="line">    &#125; &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h5>检测结果</h5>
+<p>在Xcode中，按<code>Command + U</code>开始测试，上面代码中， 我们运行的结果是 <code>Test Success</code></p>
+<h4>UIViewController的检测</h4>
+<p>对于UIViewController的检测，我们同样可以创建一个UIWindow，并且把UIViewController设置为这个UIWindow的rootViewController，同样然后让这个UIWindow进行展示，最后再将这个UIWindow设置成nil，同样也就能模拟这个UIViewController一个完整的生命周期。</p>
+<p>这样就能检测UIViewController是否存在泄漏。</p>
+<h5>UIViewController - Spec测试代码</h5>
+<p>下面写检测代码，我们定义一个局部变量weakView， 然后在一个@autoreleasepool里面创建对象， 并且这个weakView在block内部置为nil</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">describe(@&quot;TestObject&quot;, ^&#123;</span><br><span class="line">    context(@&quot;when created&quot;, ^&#123;</span><br><span class="line">        it(@&quot;should dealloc&quot;, ^&#123;</span><br><span class="line">            TestContainer *tc = [TestContainer new];</span><br><span class="line">            __weak TestViewController *weakController = nil;</span><br><span class="line">            @autoreleasepool &#123;</span><br><span class="line">                TestViewController *controller = [[TestViewController alloc] init];</span><br><span class="line">                expect(controller).beKindOf([UIViewController class]);</span><br><span class="line">                UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];</span><br><span class="line">                [window makeKeyAndVisible];</span><br><span class="line">                [window setRootViewController:controller];</span><br><span class="line">                weakController = controller;</span><br><span class="line">                expect(weakController).notTo.beNil();</span><br><span class="line">                tc.object = weakController;</span><br><span class="line">                controller = nil;</span><br><span class="line">                window = nil;</span><br><span class="line">            &#125;</span><br><span class="line">            expect(tc.object).after(5).to.beNil();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这里我们断言：断定tc的object指针在5秒钟后，是nil。</p>
+<h5>UIViewController - 模板代码</h5>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sharedExamplesFor(@&quot;viewController_dealloc_behavior&quot;, ^(NSDictionary *data) &#123;</span><br><span class="line">    context(@&quot;removed&quot;, ^&#123;</span><br><span class="line">        it(@&quot;should dealloc&quot;, ^&#123;</span><br><span class="line">            id (^block)(void) = [[data allValues] firstObject];</span><br><span class="line">            if (!block) &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            TestContainer *tc = [TestContainer new];</span><br><span class="line">            __weak UIViewController *weakController = nil;</span><br><span class="line">            @autoreleasepool &#123;</span><br><span class="line">                UIViewController *controller = block();</span><br><span class="line">                expect(controller).beKindOf([UIViewController class]);</span><br><span class="line">                UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];</span><br><span class="line">                [window makeKeyAndVisible];</span><br><span class="line">                [window setRootViewController:controller];</span><br><span class="line">                weakController = controller;</span><br><span class="line">                expect(weakController).notTo.beNil();</span><br><span class="line">                tc.object = weakController;</span><br><span class="line">                controller = nil;</span><br><span class="line">                window = nil;</span><br><span class="line">            &#125;</span><br><span class="line">            expect(tc.object).after(5).to.beNil();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>使用上面的模板代码，</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">describe(@&quot;TestViewController&quot;, ^&#123;</span><br><span class="line">    itShouldBehaveLike(@&quot;viewController_dealloc_behavior&quot;, @&#123; @&quot;value&quot; : ^&#123;</span><br><span class="line">        return [[TestViewController alloc] init];</span><br><span class="line">    &#125; &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h5>检测结果</h5>
+<p>在Xcode中，按<code>Command + U</code>开始测试，上面代码中， 我们运行的结果是 <code>Test Success</code></p>
 
-Compo...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/19</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "React Native">React Native</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/05/27/2018-05-17/" >
-                
-                    <span>多线程-生产者消费者</span>
-            </a>
-            <div class="abstract-content">
-                序
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/07/28/2018-07-28/" title= 使用Specta单元测试检测对象是否泄漏 >
+                    <div class="prevTitle">使用Specta单元测试检测对象是否泄漏</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/27</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "软件开发，多线程">软件开发，多线程</a>
-    
-</div>
-                
-            </div>
-        </article>
+    <div id="lv-container" data-id="city" data-uid= MTAyMC8zNTQ5My8xMjAyOQ==>
+        <script type="text/javascript">
+            (function (d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+
+<!-- City版安装代码已完成 -->
+
     
     
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/21/2018-03-21/" >
-                
-                    <span>iOS中的面向对象：三大特征、五大原则</span>
-            </a>
-            <div class="abstract-content">
-                三大特征
-封装
+    <!--PC版-->
 
-将对象的属性和细节隐藏起来，只提供公共的访问方式。
-
-继承
-
-继承是从已有的类派生出新的类，新的类能继承已有类的数据属性和行为，并扩展新的功能。
-
-多态
-
-同一个实现接口，使用不同的实例而执行不同的操作。
-
-五大原则
-单一职责原则
-
-一个类只负责一项职责。
-
-开放-封闭原则
-
-对扩展开放，对修改关闭。
-
-依赖倒置原则
-
-高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。
-
-里氏替换原则
-
-只要父类能出现的地方子类也可以出现，而且替换为子类不会产生任何错误或异常，但是反过来就不行，有子类出现的地方，父类未必就能适应。。
-
-接口隔离原则...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/21</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "软件开发，面向对象">软件开发，面向对象</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/01/01/2018-01-01/" >
-                
-                    <span>Shadowsocks 科学上网利器</span>
-            </a>
-            <div class="abstract-content">
-                
-Shadowsocks：科学上网利器
+    <!--PC版-->
 
 
-shadowsocks
-
-安装
-Mac和Linux都默认有Python环境，直接使用Python的包管理器pip安装shadowsocks。
-首先，下载pip的自动安装脚本bootstrap
-
-安装shadowsocks
-
-12$ sudo python get-pip.py$ sudo pip install shadowsocks
-
-新建添加配置文件 ss.config，可根据自定义的路径。配置账号进入免费ss账号
-
-12345678910&#123;  "server":"119.28.12.237",  "server_port":51...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/01/01</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VPN">VPN</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/11/09/2017-11-09/" >
-                
-                    <span>iOS 11 中 UIBarButtonItem 的变化</span>
-            </a>
-            <div class="abstract-content">
-                序
-随着 iOS 11 和 Xcode 9 的发布，导航栏UINavigationBar 里面的控件 UIBarButtonItem 有一些变化，下面我们一起看看有哪些变化。
-变化
-
-UIBarButtonItems 的custom view的点击区域更小了
-返回按钮的点击区域也更小了
-如果上一个屏幕的 title 有变化，则返回按钮的 label 不再自动更新（iOS 10 前会自动更新）
-UIBarButtonSystemItemFixedSpace 类型的 UIBarButtonItem 现在至少有 8 个点的最小宽度，负数的 width 不再生效
-重写 alignmentRect...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/11/09</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "iOS 11">iOS 11</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/10/03/2017-10-03/" >
-                
-                    <span>这些__attribute__的知识你应该知道</span>
-            </a>
-            <div class="abstract-content">
-                序
-最近查看在网上发现了个有趣的小玩意__attribute__, 也就是 Clang Attributes，这是一个编译器提供的功能，能够让我向编译器指定一些特殊的功能，比如
-
-attribute((deprecated))：描述一个方法已经废弃；
-attribute((objc_requires_super))：描述子类继承父类的方法时需要调用 super方法；
-attribute((cleanup(...))): 描述一个变量在作用域结束时能够执行指定方法；
-......
-
-Clang 编译器提供了很多的 __attribute__ 功能，下面会介绍一些 Objective-C 中...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/03</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/09/13/2017-09-13/" >
-                
-                    <span>NSTimer 不用的时候为什么需要调用invalidate？</span>
-            </a>
-            <div class="abstract-content">
-                最近在调试 NSTimer，发现了一些有趣的东西，在此文分析研究一下。
-问题
-一个 viewController，持有了一个 timer, 当不需要这个 timer 的时候，能不能只调用 self.timer = nil;？
-什么是 NSTimer？
-根据 Apple 的开源代码 CFRunLoop.c 的定义，NSTimer 对应着一个 __CFRunLoopTimer 的结构体，具体代码如下：
-__CFRunLoopTimer
-1234567891011121314struct __CFRunLoopTimer &#123;    CFRuntimeBase _base;    ui...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/09/13</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/04/02/2017-04-02/" >
-                
-                    <span>再总结一下NSString 与 NSMutableString 的 property 约束</span>
-            </a>
-            <div class="abstract-content">
-                之前在网上看了很多关于 NSString 的 property 约束，不过总感觉总结得没那么直接。这里我再重复的总结一下。
-对于 NSString 来说，到底用 copy 还是 strong?
-看看下面的代码：
-1234567891011@interface Test: NSObject@property (nonatomic, strong) NSString * string;@end// Some Code here …………NSMutableString * aStr = [@&quot;hello&quot; mutableCopy];Test * test = [Test n...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/04/02</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &#62;</a>
-    </nav>
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522950354149&di=2abb057a40aedc4f304a1aa11796b590&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Ffj%2Fpics%2Fhv1%2F162%2F192%2F1501%2F97651647.jpg >
-    <div class="profile-name">成都老刘</div>
-    
-    <div class="profile-signature">
-        来自西南利亚的冷空气
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:23775517@qq.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/mykoma" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-            
-                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
-            
-        
-    
-
-    </div>
-    
-    
-    
-</div>
             
         </div>
         <footer class="footer footer-unloaded">
@@ -797,6 +499,24 @@ __CFRunLoopTimer
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">TestContainer 代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">UIView的检测</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.1.</span> <span class="toc-text">UIView - Spec测试代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.2.</span> <span class="toc-text">UIView - 模板代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.3.</span> <span class="toc-text">检测结果</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">UIViewController的检测</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.1.</span> <span class="toc-text">UIViewController - Spec测试代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.2.</span> <span class="toc-text">UIViewController - 模板代码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.3.</span> <span class="toc-text">检测结果</span></a></li></ol></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1252,6 +972,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>

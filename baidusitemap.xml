@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://wwhy.tech/2018/08/02/2018-08-02/</loc>
+    <lastmod>2018-08-02T15:50:46.151Z</lastmod>
+    <data>
+        <display>
+        <title>使用Specta单元测试检测View和ViewController是否泄漏</title>
+        <pubTime>2018-08-02T12:00:00.000Z</pubTime>
+        
+        <tag>测试</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://wwhy.tech/2018/07/28/2018-07-28/</loc>
     <lastmod>2018-07-28T13:34:43.322Z</lastmod>
     <data>
@@ -260,14 +277,14 @@
 
     
   <url>
-    <loc>http://wwhy.tech/2016/08/21/2016-08-21/</loc>
+    <loc>http://wwhy.tech/2011/01/15/2011-01-16/</loc>
     <lastmod>2018-02-28T12:20:28.000Z</lastmod>
     <data>
         <display>
-        <title>Swift中的闭包定义</title>
-        <pubTime>2016-08-21T04:30:11.000Z</pubTime>
+        <title>C++ 字符串拷贝 汇编代码实现</title>
+        <pubTime>2011-01-15T08:20:38.000Z</pubTime>
         
-        <tag>Swift</tag>
+        <tag>C++和汇编</tag>
          
          
            
@@ -277,14 +294,14 @@
 
     
   <url>
-    <loc>http://wwhy.tech/2011/01/15/2011-01-16/</loc>
+    <loc>http://wwhy.tech/2016/08/21/2016-08-21/</loc>
     <lastmod>2018-02-28T12:20:28.000Z</lastmod>
     <data>
         <display>
-        <title>C++ 字符串拷贝 汇编代码实现</title>
-        <pubTime>2011-01-15T08:20:38.000Z</pubTime>
+        <title>Swift中的闭包定义</title>
+        <pubTime>2016-08-21T04:30:11.000Z</pubTime>
         
-        <tag>C++和汇编</tag>
+        <tag>Swift</tag>
          
          
            
