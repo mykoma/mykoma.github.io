@@ -395,89 +395,6 @@ Compo...
     
     
         <article class="index-post">
-            <a class="abstract-title" href = "/2018/05/27/2018-05-17/" >
-                
-                    <span>多线程-生产者消费者</span>
-            </a>
-            <div class="abstract-content">
-                序
-
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/27</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "软件开发，多线程">软件开发，多线程</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2018/03/21/2018-03-21/" >
-                
-                    <span>iOS中的面向对象：三大特征、五大原则</span>
-            </a>
-            <div class="abstract-content">
-                三大特征
-封装
-
-将对象的属性和细节隐藏起来，只提供公共的访问方式。
-
-继承
-
-继承是从已有的类派生出新的类，新的类能继承已有类的数据属性和行为，并扩展新的功能。
-
-多态
-
-同一个实现接口，使用不同的实例而执行不同的操作。
-
-五大原则
-单一职责原则
-
-一个类只负责一项职责。
-
-开放-封闭原则
-
-对扩展开放，对修改关闭。
-
-依赖倒置原则
-
-高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。
-
-里氏替换原则
-
-只要父类能出现的地方子类也可以出现，而且替换为子类不会产生任何错误或异常，但是反过来就不行，有子类出现的地方，父类未必就能适应。。
-
-接口隔离原则...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/03/21</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "软件开发，面向对象">软件开发，面向对象</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
             <a class="abstract-title" href = "/2018/01/01/2018-01-01/" >
                 
                     <span>Shadowsocks 科学上网利器</span>
@@ -611,6 +528,97 @@ __CFRunLoopTimer
                 <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "Objective-C">Objective-C</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2017/08/21/2017-08-21/" >
+                
+                    <span>面向对象：三大特征、五大原则</span>
+            </a>
+            <div class="abstract-content">
+                三大特征
+封装
+
+将对象的属性和细节隐藏起来，只提供公共的访问方式。
+
+继承
+
+继承是从已有的类派生出新的类，新的类能继承已有类的数据属性和行为，并扩展新的功能。
+
+多态
+
+同一个实现接口，使用不同的实例而执行不同的操作。
+
+五大原则
+单一职责原则
+
+一个类只负责一项职责。
+
+开放-封闭原则
+
+对扩展开放，对修改关闭。
+
+依赖倒置原则
+
+高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。
+
+里氏替换原则
+
+只要父类能出现的地方子类也可以出现，而且替换为子类不会产生任何错误或异常，但是反过来就不行，有子类出现的地方，父类未必就能适应。。
+
+接口隔离原则...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/21</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "软件开发，面向对象">软件开发，面向对象</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="abstract-title" href = "/2017/05/27/2017-05-17/" >
+                
+                    <span>atomic是不是线程安全的？</span>
+            </a>
+            <div class="abstract-content">
+                序
+记得以前面试的时候，有面试官问到atomic安全不安全，今天突然想起了这个问题，再总结记录一下。
+结论
+atomic是线程不安全的。
+atomic只是保证了getter和setter存取方法的线程安全，但并不能保证这个属性所对应的成员变量是线程安全的。
+解释
+意思就是： 如果多个线程调用了getter或者setter，那么这些getter和setter的调用时线性的， 保证了同一时间只有一个函数(setter和getter)在调用， 但是并不能避免这个属性所对应的成员变量是线程安全的。
+例如：
+1@property (atomic) NSString * name;
+系统自动生成的g...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/05/27</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "atomic">atomic</a>
     
 </div>
                 
@@ -951,6 +959,16 @@ __CFRunLoopTimer
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-archive"> Total : 19 </div>
     
     <div class="post-archive">
@@ -974,16 +992,6 @@ __CFRunLoopTimer
     
         <li class="archive-post-item">
             <span class="archive-post-date">07/19</span><a class="archive-post-title" href= "/2018/07/19/2018-07-19/" >React Native 中Component和PureComponent总结</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">05/27</span><a class="archive-post-title" href= "/2018/05/27/2018-05-17/" >多线程-生产者消费者</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2018/03/21/2018-03-21/" >iOS中的面向对象：三大特征、五大原则</a>
         </li>
     
     
@@ -1013,6 +1021,16 @@ __CFRunLoopTimer
     
         <li class="archive-post-item">
             <span class="archive-post-date">09/13</span><a class="archive-post-title" href= "/2017/09/13/2017-09-13/" >NSTimer 不用的时候为什么需要调用invalidate？</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/21</span><a class="archive-post-title" href= "/2017/08/21/2017-08-21/" >面向对象：三大特征、五大原则</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/27</span><a class="archive-post-title" href= "/2017/05/27/2017-05-17/" >atomic是不是线程安全的？</a>
         </li>
     
     
@@ -1070,12 +1088,12 @@ __CFRunLoopTimer
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-16/" >C++ 字符串拷贝 汇编代码实现</a>
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-15/" >C++ 字符串比较 汇编代码实现</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-15/" >C++ 字符串比较 汇编代码实现</a>
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-16/" >C++ 字符串拷贝 汇编代码实现</a>
         </li>
     
     
@@ -1113,7 +1131,7 @@ __CFRunLoopTimer
     
         <span class="sidebar-tag-name" data-tags="软件开发，面向对象"><span class="iconfont-archer">&#xe606;</span>软件开发，面向对象</span>
     
-        <span class="sidebar-tag-name" data-tags="软件开发，多线程"><span class="iconfont-archer">&#xe606;</span>软件开发，多线程</span>
+        <span class="sidebar-tag-name" data-tags="atomic"><span class="iconfont-archer">&#xe606;</span>atomic</span>
     
         <span class="sidebar-tag-name" data-tags="React Native"><span class="iconfont-archer">&#xe606;</span>React Native</span>
     

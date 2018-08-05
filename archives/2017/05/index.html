@@ -300,30 +300,32 @@
     
     
         <article class="index-post">
-            <a class="abstract-title" href = "/2016/07/07/2016-07-07/" >
+            <a class="abstract-title" href = "/2017/05/27/2017-05-17/" >
                 
-                    <span>Swift中的init</span>
+                    <span>atomic是不是线程安全的？</span>
             </a>
             <div class="abstract-content">
-                前言
-最近总算开始做新项目， 语言肯定的选Swift了。问题一个接一个，不过还好，来一个解决一个。
-今天遇到了Swift中的init的问题， 用Xcode也没有自动补全，也没有看到相关init的东西，所以对init构造过程进行一个分析。
-两个类
-有一个Parent的Class
-12345class Parent: NSObject &#123;	override init() &#123;		NSLog(&quot;Parent Init&quot;)	&#125;&#125;
-有一个Child的Class继承于Parent
-12345class Child: Parent &#123;...
+                序
+记得以前面试的时候，有面试官问到atomic安全不安全，今天突然想起了这个问题，再总结记录一下。
+结论
+atomic是线程不安全的。
+atomic只是保证了getter和setter存取方法的线程安全，但并不能保证这个属性所对应的成员变量是线程安全的。
+解释
+意思就是： 如果多个线程调用了getter或者setter，那么这些getter和setter的调用时线性的， 保证了同一时间只有一个函数(setter和getter)在调用， 但是并不能避免这个属性所对应的成员变量是线程安全的。
+例如：
+1@property (atomic) NSString * name;
+系统自动生成的g...
             </div>
             <div class="abstract-post-meta">
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/07/07</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/05/27</span>
                 </div>
                 <!-- tags  -->
                 
                 <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Swift">Swift</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "atomic">atomic</a>
     
 </div>
                 

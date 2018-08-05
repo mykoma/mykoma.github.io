@@ -91,60 +91,6 @@
   </entry>
   
   <entry>
-    <title>多线程-生产者消费者</title>
-    <link href="http://wwhy.tech/2018/05/27/2018-05-17/"/>
-    <id>http://wwhy.tech/2018/05/27/2018-05-17/</id>
-    <published>2018-05-27T08:21:00.000Z</published>
-    <updated>2018-07-19T06:05:00.072Z</updated>
-    
-    <content type="html"><![CDATA[<h3>序</h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3&gt;序&lt;/h3&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="软件开发，多线程" scheme="http://wwhy.tech/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS中的面向对象：三大特征、五大原则</title>
-    <link href="http://wwhy.tech/2018/03/21/2018-03-21/"/>
-    <id>http://wwhy.tech/2018/03/21/2018-03-21/</id>
-    <published>2018-03-21T12:31:01.000Z</published>
-    <updated>2018-07-19T03:44:19.943Z</updated>
-    
-    <content type="html"><![CDATA[<h3>三大特征</h3><h4>封装</h4><blockquote><p>将对象的属性和细节隐藏起来，只提供公共的访问方式。</p></blockquote><h4>继承</h4><blockquote><p>继承是从已有的类派生出新的类，新的类能继承已有类的数据属性和行为，并扩展新的功能。</p></blockquote><h4>多态</h4><blockquote><p>同一个实现接口，使用不同的实例而执行不同的操作。</p></blockquote><h3>五大原则</h3><h4>单一职责原则</h4><blockquote><p>一个类只负责一项职责。</p></blockquote><h4>开放-封闭原则</h4><blockquote><p>对扩展开放，对修改关闭。</p></blockquote><h4>依赖倒置原则</h4><blockquote><p>高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</p></blockquote><h4>里氏替换原则</h4><blockquote><p>只要父类能出现的地方子类也可以出现，而且替换为子类不会产生任何错误或异常，但是反过来就不行，有子类出现的地方，父类未必就能适应。。</p></blockquote><h4>接口隔离原则</h4><blockquote><p>模块间要通过抽象接口隔离开，而不是通过具体的类强耦合起来。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3&gt;三大特征&lt;/h3&gt;
-&lt;h4&gt;封装&lt;/h4&gt;
-&lt;blockquote&gt;
-&lt;p&gt;将对象的属性和细节隐藏起来，只提供公共的访问方式。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4&gt;继承&lt;/h4&gt;
-&lt;blockquote&gt;
-&lt;p&gt;继承是从已有的类派生出新的类，新的类能继承已有类的数
-      
-    
-    </summary>
-    
-    
-      <category term="软件开发，面向对象" scheme="http://wwhy.tech/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Shadowsocks 科学上网利器</title>
     <link href="http://wwhy.tech/2018/01/01/2018-01-01/"/>
     <id>http://wwhy.tech/2018/01/01/2018-01-01/</id>
@@ -244,6 +190,63 @@
     
     
       <category term="Objective-C" scheme="http://wwhy.tech/tags/Objective-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面向对象：三大特征、五大原则</title>
+    <link href="http://wwhy.tech/2017/08/21/2017-08-21/"/>
+    <id>http://wwhy.tech/2017/08/21/2017-08-21/</id>
+    <published>2017-08-21T12:31:01.000Z</published>
+    <updated>2018-08-05T12:42:21.967Z</updated>
+    
+    <content type="html"><![CDATA[<h3>三大特征</h3><h4>封装</h4><blockquote><p>将对象的属性和细节隐藏起来，只提供公共的访问方式。</p></blockquote><h4>继承</h4><blockquote><p>继承是从已有的类派生出新的类，新的类能继承已有类的数据属性和行为，并扩展新的功能。</p></blockquote><h4>多态</h4><blockquote><p>同一个实现接口，使用不同的实例而执行不同的操作。</p></blockquote><h3>五大原则</h3><h4>单一职责原则</h4><blockquote><p>一个类只负责一项职责。</p></blockquote><h4>开放-封闭原则</h4><blockquote><p>对扩展开放，对修改关闭。</p></blockquote><h4>依赖倒置原则</h4><blockquote><p>高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</p></blockquote><h4>里氏替换原则</h4><blockquote><p>只要父类能出现的地方子类也可以出现，而且替换为子类不会产生任何错误或异常，但是反过来就不行，有子类出现的地方，父类未必就能适应。。</p></blockquote><h4>接口隔离原则</h4><blockquote><p>模块间要通过抽象接口隔离开，而不是通过具体的类强耦合起来。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3&gt;三大特征&lt;/h3&gt;
+&lt;h4&gt;封装&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;将对象的属性和细节隐藏起来，只提供公共的访问方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;继承&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;继承是从已有的类派生出新的类，新的类能继承已有类的数
+      
+    
+    </summary>
+    
+    
+      <category term="软件开发，面向对象" scheme="http://wwhy.tech/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%EF%BC%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>atomic是不是线程安全的？</title>
+    <link href="http://wwhy.tech/2017/05/27/2017-05-17/"/>
+    <id>http://wwhy.tech/2017/05/27/2017-05-17/</id>
+    <published>2017-05-27T08:21:00.000Z</published>
+    <updated>2018-08-05T12:45:21.790Z</updated>
+    
+    <content type="html"><![CDATA[<h3>序</h3><p>记得以前面试的时候，有面试官问到atomic安全不安全，今天突然想起了这个问题，再总结记录一下。</p><h4>结论</h4><p>atomic是线程不安全的。</p><p>atomic只是保证了getter和setter存取方法的线程安全，但并不能保证这个属性所对应的成员变量是线程安全的。</p><h4>解释</h4><p>意思就是： 如果多个线程调用了getter或者setter，那么这些getter和setter的调用时线性的， 保证了同一时间只有一个函数(setter和getter)在调用， 但是并不能避免这个属性所对应的成员变量是线程安全的。</p><p>例如：</p><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property (atomic) NSString * name;</span><br></pre></td></tr></table></figure></p><p>系统自动生成的getter:</p><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(NSString *)name;</span><br></pre></td></tr></table></figure></p><p>Setter:</p><p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(void)setName:(NSString *)name;</span><br></pre></td></tr></table></figure></p><p>假设name所对应的成员变量是<code>_name</code>。</p><p>atomic保证的是，setter和getter是线程安全的。如，线程1调用getter了，线程2调用了setter，线程3调用了setter，那么atomic保证了一个线程的调用顺序：getter-&gt;setter-&gt;setter.</p><p>但是atomic并不能保证成员变量_name的线程安全。例如上面的例子中， 如果有个线程4直接release了_name， 那么在线程1、线程2或者线程3的调用过程中， 直接造成崩溃。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3&gt;序&lt;/h3&gt;
+&lt;p&gt;记得以前面试的时候，有面试官问到atomic安全不安全，今天突然想起了这个问题，再总结记录一下。&lt;/p&gt;
+&lt;h4&gt;结论&lt;/h4&gt;
+&lt;p&gt;atomic是线程不安全的。&lt;/p&gt;
+&lt;p&gt;atomic只是保证了getter和setter存取方法的线程安全，但并
+      
+    
+    </summary>
+    
+    
+      <category term="atomic" scheme="http://wwhy.tech/tags/atomic/"/>
     
   </entry>
   
