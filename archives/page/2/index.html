@@ -531,6 +531,36 @@ http 协议
     
     
         <article class="index-post">
+            <a class="abstract-title" href = "/2015/08/12/2015-08-12/" >
+                
+                    <span>计算机图形渲染的流程</span>
+            </a>
+            <div class="abstract-content">
+                原文链接
+计算机的绘图过程可以简单用流水线来说明，而产品（数据）就是经过流水线作业（渲染）到屏幕的图像。这条流水线可以简化为（本文的概念）：绘图位置座标指定；着色指定；输出指定；图1简单解释了这一个流水线过程。计算机绘图需要一个输入绘图数据，这个数据可以是用户指定的，也可以是操作系统决定的，也可以是混合的。这些数据是分组的。
+座标生成：当绘图数据送入座标生成系统后，流水线就会对其进行座标分派，图1右上的线框图抽象描述了这个过程。
+着色指定：当座标系统生成出带座标的绘图数据后就需要送入着色器，着色器指定了这些线框的填充颜色或纹理。
+渲染：着色器将绘图数据加上着色数据后就被送入渲染器，渲染器...
+            </div>
+            <div class="abstract-post-meta">
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2015/08/12</span>
+                </div>
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Http">Http</a>
+    
+</div>
+                
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="abstract-title" href = "/2011/01/15/2011-01-15/" >
                 
                     <span>C++ 字符串比较 汇编代码实现</span>
@@ -586,48 +616,10 @@ http 协议
             </div>
         </article>
     
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2010/09/29/2010-09-29/" >
-                
-                    <span>C++前向声明隐含的问题</span>
-            </a>
-            <div class="abstract-content">
-                前言
-导入很久很久以前写的一篇技术！缅怀下以前写 C++ 的日子
-正文
-今天写代码的时候，遇到了一个很神奇的问题，在代码编译的时候很正常，编译成功。
-但是运行的时候，问题就出来了。
-B *b;
-我在代码中A *a = b-&gt;constructA();（constructA()在内部调用new，创建一个新的A的实例）
-即由类B的对象b生成一个类A的对象a，这里没有问题，
-我在这里什么都不做，直接调用delete a；
-神奇的时刻到来了，程序直接崩溃。
-经过几个小时的分析是因为include和前向声明的问题。
-1234A.h:class A&#123;...&#125;
-1234567...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2010/09/29</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "C++和汇编">C++和汇编</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/archives/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">NEXT &#62;</a>
     </nav>
     
 </main>
@@ -920,7 +912,28 @@ B *b;
     
     
     
-    <div class="total-archive"> Total : 20 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 21 </div>
     
     <div class="post-archive">
     
@@ -1039,17 +1052,31 @@ B *b;
     
         </ul>
     
+    <div class="archive-year"> 2015 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/12</span><a class="archive-post-title" href= "/2015/08/12/2015-08-12/" >计算机图形渲染的流程</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
     <div class="archive-year"> 2011 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-15/" >C++ 字符串比较 汇编代码实现</a>
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-16/" >C++ 字符串拷贝 汇编代码实现</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-16/" >C++ 字符串拷贝 汇编代码实现</a>
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href= "/2011/01/15/2011-01-15/" >C++ 字符串比较 汇编代码实现</a>
         </li>
     
     
@@ -1075,17 +1102,17 @@ B *b;
     
         <span class="sidebar-tag-name" data-tags="Http"><span class="iconfont-archer">&#xe606;</span>Http</span>
     
-        <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
-    
         <span class="sidebar-tag-name" data-tags="Swift"><span class="iconfont-archer">&#xe606;</span>Swift</span>
     
-        <span class="sidebar-tag-name" data-tags="单元测试"><span class="iconfont-archer">&#xe606;</span>单元测试</span>
+        <span class="sidebar-tag-name" data-tags="UI布局"><span class="iconfont-archer">&#xe606;</span>UI布局</span>
     
-        <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
+        <span class="sidebar-tag-name" data-tags="单元测试"><span class="iconfont-archer">&#xe606;</span>单元测试</span>
     
         <span class="sidebar-tag-name" data-tags="atomic"><span class="iconfont-archer">&#xe606;</span>atomic</span>
     
         <span class="sidebar-tag-name" data-tags="Category"><span class="iconfont-archer">&#xe606;</span>Category</span>
+    
+        <span class="sidebar-tag-name" data-tags="Objective-C"><span class="iconfont-archer">&#xe606;</span>Objective-C</span>
     
         <span class="sidebar-tag-name" data-tags="软件开发，面向对象"><span class="iconfont-archer">&#xe606;</span>软件开发，面向对象</span>
     
