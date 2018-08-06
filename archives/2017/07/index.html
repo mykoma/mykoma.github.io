@@ -300,36 +300,37 @@
     
     
         <article class="index-post">
-            <a class="abstract-title" href = "/2016/02/02/2016-02-02/" >
+            <a class="abstract-title" href = "/2017/07/07/2017-07-07/" >
                 
-                    <span>细说 iOS 中的 http 协议</span>
+                    <span>Category的加载机制</span>
             </a>
             <div class="abstract-content">
-                前言
-http 协议在我们的工作中，基本上99%的 app 都是无法避免的，http 协议的重要性，不亚于 UIKit 的存在。
-当我们在工作中，对 http 协议的理解层度，很多时候决定了我们项目架构的深度和稳定性；
-当我们在找工作中，对 http 协议的理解层度，很多时候也决定了我们应聘的职位 level。
-在这篇文章中，我会详细的、系统的讲解下 http 协议，以及 http 协议在 iOS 中相关的一些知识。
+                序
+一直在使用Category，但是对Category的机制不太了解，这里对Category的机制进行一个总结。
+参考：传送门
+总结
+
+Category是在程序启动时作用的， 并且是在 +load 方法调用前
+加载顺序是：先类，后Category
+Category是运行时决议，Swift 的 Extension 是编译时决议
+Category是 runtime 在程序启动时，进行作用
+
+加载实例方法到class的函数列表中
+加载类方法到 meta class 的函数列表中
 
 
-http 协议细说
-http 协议在 iOS 中如何存在的
-
-
-http 协议
-关于 http 协议，
-
+Category增加方法，会更新 class 和 meta class 的函数列表，Category新增的方法在...
             </div>
             <div class="abstract-post-meta">
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2016/02/02</span>
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/07/07</span>
                 </div>
                 <!-- tags  -->
                 
                 <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Http">Http</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Category">Category</a>
     
 </div>
                 
