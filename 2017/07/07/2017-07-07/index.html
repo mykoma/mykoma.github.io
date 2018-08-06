@@ -358,16 +358,16 @@ height:50vh;
 <p>参考：<a href="https://tech.meituan.com/DiveIntoCategory.html" target="_blank" rel="noopener">传送门</a></p>
 <h4>总结</h4>
 <ol>
-<li>Category是在程序启动时作用的， 并且是在 +load 方法调用前</li>
+<li>Category是在程序启动时作用的， 并且是在 <code>+ load</code> 方法调用前</li>
 <li>如果类和Category都有<code>+ load</code>方法，这个<code>+ load</code>的加载顺序是：先类，后Category</li>
 <li>Category是运行时决议，Swift 的 Extension 是编译时决议</li>
 <li>Category是 runtime 在程序启动时，进行作用
 <ul>
-<li>加载实例方法到class的函数列表中</li>
-<li>加载类方法到 meta class 的函数列表中</li>
+<li>加载实例方法到 <code>class</code> 的函数列表中</li>
+<li>加载类方法到 <code>meta class</code> 的函数列表中</li>
 </ul>
 </li>
-<li>Category增加方法，会更新 class 和 meta class 的函数列表，Category新增的方法在前， 原函数列表在后；</li>
+<li>Category增加方法，会更新 <code>class</code> 和 <code>meta class</code> 的函数列表，Category新增的方法在前， 原函数列表在后；</li>
 <li>Category如果新增了一个同名的方法，其实并没有替换到原来的函数，只是新增的同名方法在函数列表的前面，原来的方法在后面，所以有时会给人一个错觉——覆盖了方法</li>
 </ol>
 
