@@ -198,9 +198,9 @@
     <link href="http://wwhy.tech/2017/08/21/2017-08-21/"/>
     <id>http://wwhy.tech/2017/08/21/2017-08-21/</id>
     <published>2017-08-21T12:31:01.000Z</published>
-    <updated>2018-08-05T12:42:21.967Z</updated>
+    <updated>2018-08-08T06:32:22.157Z</updated>
     
-    <content type="html"><![CDATA[<h3>三大特征</h3><h4>封装</h4><blockquote><p>将对象的属性和细节隐藏起来，只提供公共的访问方式。</p></blockquote><h4>继承</h4><blockquote><p>继承是从已有的类派生出新的类，新的类能继承已有类的数据属性和行为，并扩展新的功能。</p></blockquote><h4>多态</h4><blockquote><p>同一个实现接口，使用不同的实例而执行不同的操作。</p></blockquote><h3>五大原则</h3><h4>单一职责原则</h4><blockquote><p>一个类只负责一项职责。</p></blockquote><h4>开放-封闭原则</h4><blockquote><p>对扩展开放，对修改关闭。</p></blockquote><h4>依赖倒置原则</h4><blockquote><p>高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</p></blockquote><h4>里氏替换原则</h4><blockquote><p>只要父类能出现的地方子类也可以出现，而且替换为子类不会产生任何错误或异常，但是反过来就不行，有子类出现的地方，父类未必就能适应。。</p></blockquote><h4>接口隔离原则</h4><blockquote><p>模块间要通过抽象接口隔离开，而不是通过具体的类强耦合起来。</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h3>三大特征</h3><h4>封装</h4><blockquote><p>将对象的属性和细节隐藏起来，只提供公共的访问方式。</p></blockquote><h4>继承</h4><blockquote><p>继承是从已有的类派生出新的类，新的类能继承已有类的数据属性和行为，并扩展新的功能。</p></blockquote><h4>多态</h4><blockquote><p>同一个实现接口，使用不同的实例而执行不同的操作。</p></blockquote><h3>五大原则</h3><h4>单一职责原则</h4><blockquote><p>一个类只负责一项职责。</p></blockquote><h4>开放-封闭原则</h4><blockquote><p>对扩展开放，对修改关闭。</p></blockquote><h4>依赖倒置原则</h4><blockquote><p>高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</p></blockquote><h4>里氏替换原则</h4><blockquote><p>只要父类能出现的地方子类也可以出现，而且替换为子类不会产生任何错误或异常，但是反过来就不行，有子类出现的地方，父类未必就能适应。。</p></blockquote><h4>接口隔离原则</h4><blockquote><p>一个类对另外一个类的依赖性应当是建立在最小的接口上的。</p></blockquote>]]></content>
     
     <summary type="html">
     
